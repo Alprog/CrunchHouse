@@ -18,13 +18,17 @@ public partial class CameraManager : Node3D
 	public const float MaxAngle = Mathf.Pi * 0.49f;
 	public float AngleK = 0.5f;
 
+	public const float MinFov = Mathf.Pi / 30.0f;
+	public const float MaxFov = Mathf.Pi / 3.0f;
+	public float FovK = 0.5f;
+
 	[Export] public Camera3D Camera { get; set; }
 
 	public float VisibleAreaLength => Mathf.Lerp(MaxCellCount, MinCellCount, ZoomK);
 	public float Angle => Mathf.Lerp(MinAngle, MaxAngle, AngleK);
+	public float FieldOfView => Mathf.Lerp(MinFov, MaxFov, FovK);
 
 	public bool IsOrthogonal = true;
-	public float FieldOfView = Mathf.Pi / 18.0f;
 
 	public override void _Ready()
 	{
@@ -87,6 +91,16 @@ public partial class CameraManager : Node3D
 		{
 			IsOrthogonal = true;
 		}
+
+		if (Input.IsKeyPressed(Key.O))
+		{
+			FovK += delta / 2;
+		}
+		if (Input.IsKeyPressed(Key.P))
+		{
+			FovK -= delta / 2;
+		}
+		FovK = Mathf.Clamp(FovK, 0, 1);
 	}
 
 	public void RefreshCameraPosition()
@@ -95,7 +109,7 @@ public partial class CameraManager : Node3D
 		
 		Camera.Projection = IsOrthogonal ? Camera3D.ProjectionType.Orthogonal : Camera3D.ProjectionType.Perspective;
 		Camera.Size = VisibleAreaLength * Mathf.Sin(Angle);
-		Camera.Fov = FieldOfView;
+		Camera.Fov = Mathf.RadToDeg(FieldOfView);
 
 		GD.Print(VisibleAreaLength);
 

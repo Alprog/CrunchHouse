@@ -58,7 +58,7 @@ text = "Button
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="Body" type="Sprite3D" parent="Node3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.47787, 0.89674, -2.35793)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.773, 0.89674, -2.35793)
 material_override = SubResource("StandardMaterial3D_rq8ic")
 texture = ExtResource("3_aabbw")
 script = ExtResource("2_xraar")
