@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwrfsj27fbb5y"]
+[gd_scene load_steps=10 format=3 uid="uid://dwrfsj27fbb5y"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
+[ext_resource type="Script" path="res://Developer.cs" id="2_xraar"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq8ic"]
@@ -52,6 +53,7 @@ text = "Button
 transform = Transform3D(-0.862117, 0, -0.877296, 0, 1.23, 0, 0.877296, 0, -0.862117, -1.773, 1.946, -2.582)
 material_override = SubResource("StandardMaterial3D_rq8ic")
 texture = ExtResource("3_aabbw")
+script = ExtResource("2_xraar")
 
 [node name="Head" type="Sprite3D" parent="Node3D/Body2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65296, 0.181683)
