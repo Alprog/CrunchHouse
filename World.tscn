@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwrfsj27fbb5y"]
+[gd_scene load_steps=12 format=3 uid="uid://dwrfsj27fbb5y"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
+[ext_resource type="Script" path="res://CameraManager.cs" id="1_pl72p"]
 [ext_resource type="Script" path="res://Developer.cs" id="2_xraar"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
+[ext_resource type="Texture2D" uid="uid://s40tafgvxg7s" path="res://Sprites/Cell.png" id="5_t3xmd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq8ic"]
 transparency = 2
@@ -20,8 +22,9 @@ albedo_texture = ExtResource("1_3n1m8")
 rim_tint = 1.0
 backlight = Color(0.733333, 0.34902, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rffq8"]
-albedo_color = Color(0.0941176, 0.301961, 0.172549, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t3fw"]
+albedo_texture = ExtResource("5_t3xmd")
+uv1_scale = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4uu17"]
 
@@ -31,12 +34,17 @@ albedo_color = Color(0.0941176, 0.301961, 0.172549, 1)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.475, 80, 80)
+[node name="CameraManager" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
+script = ExtResource("1_pl72p")
+Camera = NodePath("../Camera")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7, 7)
+projection = 1
 current = true
 fov = 10.0
-size = 20.0
-near = 100.0
+size = 11.38
+near = 0.1
 far = 241.57
 
 [node name="Button" type="Button" parent="."]
@@ -60,9 +68,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65296, 0.181683)
 material_override = SubResource("StandardMaterial3D_050cq")
 texture = ExtResource("1_3n1m8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+[node name="Plane" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_rffq8")
+material_override = SubResource("StandardMaterial3D_8t3fw")
 mesh = SubResource("PlaneMesh_4uu17")
 skeleton = NodePath("../..")
 
@@ -78,3 +86,10 @@ shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 0.0
+
+[node name="CheckButton" type="CheckButton" parent="."]
+offset_left = 55.0
+offset_top = 36.0
+offset_right = 99.0
+offset_bottom = 60.0
+text = "Orthogonal"
