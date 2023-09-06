@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 public partial class CameraManager : Node3D
 {
@@ -8,8 +9,6 @@ public partial class CameraManager : Node3D
 	public Vector3 FocusPosition;
 
 	public const float PanningScreenPerSecond = 1.0f;
-
-	public float Distance = 80.0f;
 
 	public const float MinCellCount = 10.0f;
 	public const float MaxCellCount = 80.0f;
@@ -23,6 +22,9 @@ public partial class CameraManager : Node3D
 
 	public float VisibleAreaLength => Mathf.Lerp(MaxCellCount, MinCellCount, ZoomK);
 	public float Angle => Mathf.Lerp(MinAngle, MaxAngle, AngleK);
+
+	public bool IsOrthogonal = true;
+	public float FieldOfView = Mathf.Pi / 18.0f;
 
 	public override void _Ready()
 	{
@@ -76,17 +78,46 @@ public partial class CameraManager : Node3D
 			AngleK -= delta / 2;
 		}
 		AngleK = Mathf.Clamp(AngleK, 0, 1);
+
+		if (Input.IsKeyPressed(Key.Key1))
+		{
+			IsOrthogonal = false;
+		}
+		if (Input.IsKeyPressed(Key.Key2))
+		{
+			IsOrthogonal = true;
+		}
 	}
 
 	public void RefreshCameraPosition()
 	{
 		var OffsetDirection = new Vector3(0, Mathf.Sin(Angle), Mathf.Cos(Angle));
 		
-		Camera.Size = VisibleAreaLength * Mathf.Sin(Angle) * 2;
+		Camera.Projection = IsOrthogonal ? Camera3D.ProjectionType.Orthogonal : Camera3D.ProjectionType.Perspective;
+		Camera.Size = VisibleAreaLength * Mathf.Sin(Angle);
+		Camera.Fov = FieldOfView;
+
 		GD.Print(VisibleAreaLength);
 
+		var Distance = IsOrthogonal ? 80.0f : CalculateDistance();
 		Camera.Position = FocusPosition + OffsetDirection * Distance;
 
+		
 		Camera.LookAt(FocusPosition);
+	}
+
+	public float CalculateDistance()
+	{
+		var viewAngle = Angle;
+
+		var nearAngle = viewAngle + FieldOfView / 2;
+		var farAngle = viewAngle - FieldOfView / 2;
+		
+		var nearXperY = Mathf.Cos(nearAngle) / Mathf.Sin(nearAngle);
+		var farXperY = Mathf.Cos(farAngle) / Mathf.Sin(farAngle);
+
+		// (farXperY - nearXperY) * Y = VisibleAreaLength
+		var y = VisibleAreaLength / (farXperY - nearXperY);
+		return y / Mathf.Sin(viewAngle);
 	}
 }

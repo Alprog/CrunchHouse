@@ -57,25 +57,24 @@ text = "Button
 
 [node name="Node3D" type="Node3D" parent="."]
 
-[node name="Body2" type="Sprite3D" parent="Node3D"]
-transform = Transform3D(-0.862117, 0, -0.877296, 0, 1.23, 0, 0.877296, 0, -0.862117, -1.773, 1.946, -2.582)
+[node name="Body" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.47787, 0.89674, -2.35793)
 material_override = SubResource("StandardMaterial3D_rq8ic")
 texture = ExtResource("3_aabbw")
 script = ExtResource("2_xraar")
 
-[node name="Head" type="Sprite3D" parent="Node3D/Body2"]
+[node name="Head" type="Sprite3D" parent="Node3D/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65296, 0.181683)
 material_override = SubResource("StandardMaterial3D_050cq")
 texture = ExtResource("1_3n1m8")
 
 [node name="Plane" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_8t3fw")
 mesh = SubResource("PlaneMesh_4uu17")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3196, 0.443403, 2.74966)
 material_override = SubResource("StandardMaterial3D_yen45")
 mesh = SubResource("BoxMesh_d2mx5")
 skeleton = NodePath("../..")
