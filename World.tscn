@@ -1,20 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2go40oph8wlr"]
+[gd_scene load_steps=10 format=3 uid="uid://c2go40oph8wlr"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
 [ext_resource type="Script" path="res://Source/CameraManager.cs" id="1_tartv"]
+[ext_resource type="Script" path="res://Grid.cs" id="2_i5jv2"]
 [ext_resource type="Script" path="res://Source/Developer.cs" id="3_5pln1"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
-[ext_resource type="Texture2D" uid="uid://s40tafgvxg7s" path="res://Sprites/Cell.png" id="5_t3xmd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yen45"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d2mx5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t3fw"]
-albedo_texture = ExtResource("5_t3xmd")
-uv1_scale = Vector3(200, 200, 200)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_4uu17"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq8ic"]
 transparency = 2
@@ -46,6 +40,9 @@ size = 11.38
 near = 0.1
 far = 241.57
 
+[node name="Grid" type="Node3D" parent="."]
+script = ExtResource("2_i5jv2")
+
 [node name="Button" type="Button" parent="."]
 offset_left = 175.0
 offset_top = 107.0
@@ -58,11 +55,6 @@ text = "Button
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1495, 0, 10.9436)
 material_override = SubResource("StandardMaterial3D_yen45")
 mesh = SubResource("BoxMesh_d2mx5")
-
-[node name="Plane" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 100, 0, 100)
-material_override = SubResource("StandardMaterial3D_8t3fw")
-mesh = SubResource("PlaneMesh_4uu17")
 
 [node name="Body" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 28.48, 0.89674, 13.9153)
