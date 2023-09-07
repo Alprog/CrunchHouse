@@ -13,6 +13,7 @@ public partial class CameraManager : Node3D
 	public const float MinCellCount = 10.0f;
 	public const float MaxCellCount = 80.0f;
 	public float ZoomK = 0.5f;
+	public int ZoomStepCount = 20;
 
 	public const float MinAngle = Mathf.Pi * 0.20f;
 	public const float MaxAngle = Mathf.Pi * 0.49f;
@@ -24,7 +25,7 @@ public partial class CameraManager : Node3D
 
 	[Export] public Camera3D Camera { get; set; }
 
-	public float VisibleAreaLength => Mathf.Lerp(MaxCellCount, MinCellCount, ZoomK);
+	public float VisibleAreaLength => Mathf.Lerp(MaxCellCount, MinCellCount, Mathf.Sqrt(ZoomK));
 	public float Angle => Mathf.Lerp(MinAngle, MaxAngle, AngleK);
 	public float FieldOfView => Mathf.Lerp(MinFov, MaxFov, FovK);
 
@@ -38,6 +39,22 @@ public partial class CameraManager : Node3D
 	{
 		ProcessInput((float)delta);
 		RefreshCameraPosition();
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		var moubeEvent = @event as InputEventMouseButton;
+		if (moubeEvent.IsPressed())
+		{
+			if (moubeEvent.ButtonIndex == MouseButton.WheelUp)
+			{
+				ZoomK += 1.0f / ZoomStepCount;
+			}
+			else if (moubeEvent.ButtonIndex == MouseButton.WheelDown)
+			{
+				ZoomK -= 1.0f / ZoomStepCount;
+			}
+		}
 	}
 
 	public void ProcessInput(float delta)

@@ -1,10 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwrfsj27fbb5y"]
+[gd_scene load_steps=12 format=3 uid="uid://c2go40oph8wlr"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
-[ext_resource type="Script" path="res://CameraManager.cs" id="1_pl72p"]
-[ext_resource type="Script" path="res://Developer.cs" id="2_xraar"]
+[ext_resource type="Script" path="res://Source/CameraManager.cs" id="1_tartv"]
+[ext_resource type="Script" path="res://Source/Developer.cs" id="3_5pln1"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
 [ext_resource type="Texture2D" uid="uid://s40tafgvxg7s" path="res://Sprites/Cell.png" id="5_t3xmd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yen45"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d2mx5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t3fw"]
+albedo_texture = ExtResource("5_t3xmd")
+uv1_scale = Vector3(200, 200, 200)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4uu17"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq8ic"]
 transparency = 2
@@ -22,24 +32,13 @@ albedo_texture = ExtResource("1_3n1m8")
 rim_tint = 1.0
 backlight = Color(0.733333, 0.34902, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t3fw"]
-albedo_texture = ExtResource("5_t3xmd")
-uv1_scale = Vector3(20, 20, 20)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_4uu17"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yen45"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_d2mx5"]
-
 [node name="Node3D" type="Node3D"]
 
 [node name="CameraManager" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
-script = ExtResource("1_pl72p")
-Camera = NodePath("../Camera")
+script = ExtResource("1_tartv")
+Camera = NodePath("Camera")
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7, 7)
+[node name="Camera" type="Camera3D" parent="CameraManager"]
 projection = 1
 current = true
 fov = 10.0
@@ -55,29 +54,28 @@ offset_bottom = 138.0
 text = "Button
 "
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1495, 0, 10.9436)
+material_override = SubResource("StandardMaterial3D_yen45")
+mesh = SubResource("BoxMesh_d2mx5")
 
-[node name="Body" type="Sprite3D" parent="Node3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.773, 0.89674, -2.35793)
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 100, 0, 100)
+material_override = SubResource("StandardMaterial3D_8t3fw")
+mesh = SubResource("PlaneMesh_4uu17")
+
+[node name="Body" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 28.48, 0.89674, 13.9153)
 material_override = SubResource("StandardMaterial3D_rq8ic")
 texture = ExtResource("3_aabbw")
-script = ExtResource("2_xraar")
+script = ExtResource("3_5pln1")
 
-[node name="Head" type="Sprite3D" parent="Node3D/Body"]
+[node name="Head" type="Sprite3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65296, 0.181683)
 material_override = SubResource("StandardMaterial3D_050cq")
 texture = ExtResource("1_3n1m8")
 
-[node name="Plane" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_8t3fw")
-mesh = SubResource("PlaneMesh_4uu17")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
-material_override = SubResource("StandardMaterial3D_yen45")
-mesh = SubResource("BoxMesh_d2mx5")
-skeleton = NodePath("../..")
+[node name="Node3D" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.799685, -0.411016, 0.437687, 0, 0.728969, 0.684547, -0.60042, -0.547422, 0.582945, 0, 5.65848, 9.12431)
