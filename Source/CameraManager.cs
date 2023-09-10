@@ -128,7 +128,7 @@ public partial class CameraManager : Node3D
 		Camera.Size = VisibleAreaLength * Mathf.Sin(Angle);
 		Camera.Fov = Mathf.RadToDeg(FieldOfView);
 
-		GD.Print(VisibleAreaLength);
+		//GD.Print(VisibleAreaLength);
 
 		var Distance = IsOrthogonal ? 80.0f : CalculateDistance();
 		Camera.Position = FocusPosition + OffsetDirection * Distance;

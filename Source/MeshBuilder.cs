@@ -8,10 +8,11 @@ public class MeshBuilder
 	public List<Vector3> Positions = new List<Vector3>();
 	public List<Vector2> UVs = new List<Vector2>();
 	public List<Vector3> Normals = new List<Vector3>();
+	public List<int> Bones = new List<int>();
 	public List<int> Indicies = new List<int>();
 	public List<Material> Materials = new List<Material>();
-
-	public void AddTile(float x, float z)
+	
+	public void AddTile(float x, float z, int tileIndex)
 	{
 		var vertexCount = Positions.Count;
 
@@ -39,6 +40,13 @@ public class MeshBuilder
 			Vector3.Up
 		});
 
+		Bones.AddRange(new int[] {
+			tileIndex, 0, 0, 0,
+			tileIndex, 0, 0, 0,
+			tileIndex, 0, 0, 0,
+			tileIndex, 0, 0, 0,
+		});
+
 		int i = vertexCount;
 		Indicies.AddRange(new[]
 		{
@@ -54,6 +62,7 @@ public class MeshBuilder
 		arrays[(int)Mesh.ArrayType.Vertex] = Positions.ToArray();
 		arrays[(int)Mesh.ArrayType.TexUV] = UVs.ToArray();
 		arrays[(int)Mesh.ArrayType.Normal] = Normals.ToArray();
+		arrays[(int)Mesh.ArrayType.Bones] = Bones.ToArray();
 		arrays[(int)Mesh.ArrayType.Index] = Indicies.ToArray();
 
 		var arrayMesh = new ArrayMesh();

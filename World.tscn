@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
 [ext_resource type="Script" path="res://Source/CameraManager.cs" id="1_tartv"]
-[ext_resource type="Script" path="res://Grid.cs" id="2_i5jv2"]
+[ext_resource type="Script" path="res://Source/Grid.cs" id="2_pafcw"]
 [ext_resource type="Script" path="res://Source/Developer.cs" id="3_5pln1"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
 
@@ -41,7 +41,7 @@ near = 0.1
 far = 241.57
 
 [node name="Grid" type="Node3D" parent="."]
-script = ExtResource("2_i5jv2")
+script = ExtResource("2_pafcw")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 175.0
@@ -70,7 +70,7 @@ texture = ExtResource("1_3n1m8")
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.799685, -0.411016, 0.437687, 0, 0.728969, 0.684547, -0.60042, -0.547422, 0.582945, 0, 5.65848, 9.12431)
+transform = Transform3D(0.62572, 0.116575, 0.771288, -0.485428, 0.832176, 0.268034, -0.610601, -0.542119, 0.577298, 0, 5.65848, 9.12431)
 shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_fade_start = 1.0
