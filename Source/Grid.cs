@@ -20,27 +20,40 @@ public partial class Grid : Node3D
 
 		int index = 0;
 		
+		var image = Image.Create(200, 200, false, Image.Format.Rgba8);
 		for (int z = 0; z < 200; z++)
 		{			
 			for (int x = 0; x < 200; x++)
 			{
+				image.SetPixel(x, z, new Color(0, 0, 0));
 				builder.AddTile(x, z, index++);
 			}
 		}
-	
-		var material = GD.Load("res://custom.material") as ShaderMaterial;
 
-		var colors = new Vector3[100];
-		for (int i = 0; i < 100; i++)
+		
+		for (int i = 0; i < 1000; i++)
 		{
-			colors[i] = Vector3.One / 2;
+			var color = new Color((uint)i);
+			image.SetPixel(i, i, color);
 		}
-		colors[0] = new Vector3(1, 0, 0);
-		colors[1] = new Vector3(0, 1, 0);
-		colors[2] = new Vector3(0, 0, 1);
-		colors[3] = new Vector3(1, 1, 0);
-		colors[4] = new Vector3(0, 1, 1);
-		colors[5] = new Vector3(1, 0, 1);
+
+		var mapTexture = ImageTexture.CreateFromImage(image);
+	
+		image.SetPixel(2, 0, new Color(3u));
+		mapTexture.Update(image);
+
+		var material = GD.Load("res://custom.material") as ShaderMaterial;
+		material.SetShaderParameter("map", mapTexture);
+
+		var colors = new Color[40000];
+		colors[0] = new Color(1, 0, 0);
+		colors[1] = new Color(0, 1, 0);
+		colors[2] = new Color(0, 0, 1);
+		colors[3] = new Color(1, 1, 0);
+		colors[4] = new Color(0, 1, 1);
+		colors[5] = new Color(1, 0, 1);
+
+		colors[4095] = new Color(1, 1, 0);
 
 		material.SetShaderParameter("colors", colors);
 		builder.Materials.Add(material);

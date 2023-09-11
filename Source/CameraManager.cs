@@ -43,14 +43,14 @@ public partial class CameraManager : Node3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		var moubeEvent = @event as InputEventMouseButton;
-		if (moubeEvent.IsPressed())
+		var mouseEvent = @event as InputEventMouseButton;
+		if (mouseEvent != null && mouseEvent.IsPressed())
 		{
-			if (moubeEvent.ButtonIndex == MouseButton.WheelUp)
+			if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
 			{
 				ZoomK += 1.0f / ZoomStepCount;
 			}
-			else if (moubeEvent.ButtonIndex == MouseButton.WheelDown)
+			else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 			{
 				ZoomK -= 1.0f / ZoomStepCount;
 			}

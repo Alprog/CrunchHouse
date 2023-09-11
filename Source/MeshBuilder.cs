@@ -40,11 +40,13 @@ public class MeshBuilder
 			Vector3.Up
 		});
 
+		var ix = (int)x;
+		var iz = (int)z;
 		Bones.AddRange(new int[] {
-			tileIndex, 0, 0, 0,
-			tileIndex, 0, 0, 0,
-			tileIndex, 0, 0, 0,
-			tileIndex, 0, 0, 0,
+			ix, iz, 0, 0,
+			ix, iz, 0, 0,
+			ix, iz, 0, 0,
+			ix, iz, 0, 0,
 		});
 
 		int i = vertexCount;

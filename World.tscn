@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://c2go40oph8wlr"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
-[ext_resource type="Script" path="res://Source/CameraManager.cs" id="1_tartv"]
-[ext_resource type="Script" path="res://Source/Grid.cs" id="2_pafcw"]
-[ext_resource type="Script" path="res://Source/Developer.cs" id="3_5pln1"]
+[ext_resource type="Script" path="res://source/CameraManager.cs" id="1_l455k"]
+[ext_resource type="Script" path="res://source/Grid.cs" id="2_xw21y"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
+[ext_resource type="Script" path="res://source/Developer.cs" id="4_j5tsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yen45"]
 
@@ -29,7 +29,7 @@ backlight = Color(0.733333, 0.34902, 0, 1)
 [node name="Node3D" type="Node3D"]
 
 [node name="CameraManager" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
-script = ExtResource("1_tartv")
+script = ExtResource("1_l455k")
 Camera = NodePath("Camera")
 
 [node name="Camera" type="Camera3D" parent="CameraManager"]
@@ -41,7 +41,7 @@ near = 0.1
 far = 241.57
 
 [node name="Grid" type="Node3D" parent="."]
-script = ExtResource("2_pafcw")
+script = ExtResource("2_xw21y")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 175.0
@@ -60,7 +60,7 @@ mesh = SubResource("BoxMesh_d2mx5")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 28.48, 0.89674, 13.9153)
 material_override = SubResource("StandardMaterial3D_rq8ic")
 texture = ExtResource("3_aabbw")
-script = ExtResource("3_5pln1")
+script = ExtResource("4_j5tsv")
 
 [node name="Head" type="Sprite3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65296, 0.181683)

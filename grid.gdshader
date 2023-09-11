@@ -1,16 +1,23 @@
 shader_type spatial;
 
 uniform sampler2D cellTexture;
-uniform vec3 colors[100];
+uniform sampler2D map;
+uniform vec4 colors[10];
 
-varying flat uint index;
+varying flat int index;
 
 void vertex() 
 {
-	index = BONE_INDICES.x % 17u;
+	int x = int(BONE_INDICES.x);
+	int y = int(BONE_INDICES.y);	
+	vec4 texel = texelFetch(map, ivec2(x, y), 0);
+	ivec4 itexel = ivec4(texel * 255.0f);
+	index = int(itexel.a);
 }
 
 void fragment() 
 {
-	ALBEDO = colors[index] + texture(cellTexture, UV).xyz;
+	vec3 fillColor = colors[index].xyz;
+	vec3 cellColor = texture(cellTexture, UV).xyz;
+	ALBEDO = fillColor + cellColor;
 }
