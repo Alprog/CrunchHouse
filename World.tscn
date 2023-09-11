@@ -41,8 +41,9 @@ size = 11.38
 near = 0.1
 far = 500.0
 
-[node name="Grid" type="Node3D" parent="."]
+[node name="Grid" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
 script = ExtResource("2_xw21y")
+Camera = NodePath("../CameraManager/Camera")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1495, 0, 10.9436)

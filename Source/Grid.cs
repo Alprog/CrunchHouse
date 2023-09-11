@@ -3,6 +3,7 @@ using System;
 
 public partial class Grid : Node3D
 {
+	[Export] public Camera3D Camera;
 	public TileMap TileMap;
 	public Vector2I Pos;
 
@@ -18,7 +19,24 @@ public partial class Grid : Node3D
 	public override void _Process(double delta)
 	{
 		ProcessInput();
+		ProcessMouse();
 		TileMap.Sync();
+	}
+
+	public void ProcessMouse()
+	{
+		var screenPosition = GetViewport().GetMousePosition();
+		var rayOrigin = Camera.ProjectRayOrigin(screenPosition);
+		var rayDirection = Camera.ProjectRayNormal(screenPosition);
+
+		var distance = rayOrigin.Y / -rayDirection.Y;
+
+		var collisionPosition = rayOrigin + rayDirection * distance;
+
+		int x = (int)collisionPosition.X;
+		int z = (int)collisionPosition.Z;
+
+		TileMap.SetTileIndex(x, z, 4);
 	}
 
 	public void ProcessInput()

@@ -4,8 +4,6 @@ using System.Runtime.CompilerServices;
 
 public partial class CameraManager : Node3D
 {
-	[Export] public int I;
-
 	public Vector3 FocusPosition;
 
 	public const float PanningScreenPerSecond = 1.0f;
