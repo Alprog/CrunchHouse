@@ -11,7 +11,7 @@ public partial class CameraManager : Node3D
 	public const float PanningScreenPerSecond = 1.0f;
 
 	public const float MinCellCount = 10.0f;
-	public const float MaxCellCount = 80.0f;
+	public const float MaxCellCount = 160.0f;
 	public float ZoomK = 0.5f;
 	public int ZoomStepCount = 20;
 

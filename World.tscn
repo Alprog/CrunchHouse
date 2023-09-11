@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2go40oph8wlr"]
+[gd_scene load_steps=11 format=3 uid="uid://c2go40oph8wlr"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://Sprites/Head.png" id="1_3n1m8"]
 [ext_resource type="Script" path="res://source/CameraManager.cs" id="1_l455k"]
 [ext_resource type="Script" path="res://source/Grid.cs" id="2_xw21y"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://Sprites/Body.png" id="3_aabbw"]
 [ext_resource type="Script" path="res://source/Developer.cs" id="4_j5tsv"]
+[ext_resource type="Script" path="res://source/FPSLabel.cs" id="6_7btuf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yen45"]
 
@@ -38,18 +39,10 @@ current = true
 fov = 10.0
 size = 11.38
 near = 0.1
-far = 241.57
+far = 500.0
 
 [node name="Grid" type="Node3D" parent="."]
 script = ExtResource("2_xw21y")
-
-[node name="Button" type="Button" parent="."]
-offset_left = 175.0
-offset_top = 107.0
-offset_right = 237.0
-offset_bottom = 138.0
-text = "Button
-"
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1495, 0, 10.9436)
@@ -76,9 +69,7 @@ directional_shadow_mode = 1
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 0.0
 
-[node name="CheckButton" type="CheckButton" parent="."]
-offset_left = 55.0
-offset_top = 36.0
-offset_right = 99.0
-offset_bottom = 60.0
-text = "Orthogonal"
+[node name="FPSLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_7btuf")

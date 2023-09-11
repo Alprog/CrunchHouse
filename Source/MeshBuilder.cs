@@ -12,7 +12,7 @@ public class MeshBuilder
 	public List<int> Indicies = new List<int>();
 	public List<Material> Materials = new List<Material>();
 	
-	public void AddTile(float x, float z, int tileIndex)
+	public void AddTile(float x, float z)
 	{
 		var vertexCount = Positions.Count;
 

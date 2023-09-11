@@ -3,57 +3,76 @@ using System;
 
 public partial class Grid : Node3D
 {
+	public TileMap TileMap;
+	public Vector2I Pos;
+
 	public override void _Ready()
 	{
+		TileMap = new TileMap(Vector2I.One * 200);
+
 		var meshInstance = new MeshInstance3D();
 		meshInstance.Mesh = CreateMesh();
-		AddChild(meshInstance);
+		AddChild(meshInstance);		
 	}
 
 	public override void _Process(double delta)
 	{
+		ProcessInput();
+		TileMap.Sync();
+	}
+
+	public void ProcessInput()
+	{
+		if (Input.IsKeyPressed(Key.I))
+		{
+			Pos.Y -= 1;
+			MarkCurrent();
+		}
+		if (Input.IsKeyPressed(Key.J))
+		{
+			Pos.X -= 1;
+			MarkCurrent();
+		}
+		if (Input.IsKeyPressed(Key.K))
+		{
+			Pos.Y += 1;
+			MarkCurrent();
+		}
+		if (Input.IsKeyPressed(Key.L))
+		{
+			Pos.X += 1;
+			MarkCurrent();
+		}
+	}
+
+	public void MarkCurrent()
+	{
+		TileMap.SetTileIndex(Pos.X, Pos.Y, 2);
 	}
 
 	public Mesh CreateMesh()
 	{
 		var builder = new MeshBuilder();
-
-		int index = 0;
 		
-		var image = Image.Create(200, 200, false, Image.Format.Rgba8);
-		for (int z = 0; z < 200; z++)
+		var size = TileMap.Size;
+		for (int z = 0; z < size.Y; z++)
 		{			
-			for (int x = 0; x < 200; x++)
+			for (int x = 0; x < size.X; x++)
 			{
-				image.SetPixel(x, z, new Color(0, 0, 0));
-				builder.AddTile(x, z, index++);
+				builder.AddTile(x, z);
 			}
 		}
 
-		
-		for (int i = 0; i < 1000; i++)
-		{
-			var color = new Color((uint)i);
-			image.SetPixel(i, i, color);
-		}
-
-		var mapTexture = ImageTexture.CreateFromImage(image);
-	
-		image.SetPixel(2, 0, new Color(3u));
-		mapTexture.Update(image);
-
 		var material = GD.Load("res://custom.material") as ShaderMaterial;
-		material.SetShaderParameter("map", mapTexture);
+		material.SetShaderParameter("map", TileMap.Texture);
 
-		var colors = new Color[40000];
-		colors[0] = new Color(1, 0, 0);
+		var colors = new Color[10];
+		colors[0] = new Color(0.1f, 0.4f, 0.1f);
 		colors[1] = new Color(0, 1, 0);
 		colors[2] = new Color(0, 0, 1);
 		colors[3] = new Color(1, 1, 0);
 		colors[4] = new Color(0, 1, 1);
 		colors[5] = new Color(1, 0, 1);
-
-		colors[4095] = new Color(1, 1, 0);
 
 		material.SetShaderParameter("colors", colors);
 		builder.Materials.Add(material);
