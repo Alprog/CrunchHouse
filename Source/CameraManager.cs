@@ -19,6 +19,8 @@ public partial class CameraManager : Node3D
 	public const float MaxAngle = Mathf.Pi * 0.49f;
 	public float AngleK = 0.5f;
 
+	public float Rotation = 0.0f;
+
 	public const float MinFov = Mathf.Pi / 30.0f;
 	public const float MaxFov = Mathf.Pi / 3.0f;
 	public float FovK = 0.5f;
@@ -29,7 +31,7 @@ public partial class CameraManager : Node3D
 	public float Angle => Mathf.Lerp(MinAngle, MaxAngle, AngleK);
 	public float FieldOfView => Mathf.Lerp(MinFov, MaxFov, FovK);
 
-	public bool IsOrthogonal = true;
+	public bool IsOrthogonal = false;
 
 	public override void _Ready()
 	{
@@ -78,6 +80,8 @@ public partial class CameraManager : Node3D
 			Direction += Vector3.Right;
 		}
 
+		Direction = Direction.Rotated(Vector3.Up, Rotation);
+
 		if (Input.IsKeyPressed(Key.Q))
 		{
 			ZoomK += delta / 2;
@@ -118,11 +122,23 @@ public partial class CameraManager : Node3D
 			FovK -= delta / 2;
 		}
 		FovK = Mathf.Clamp(FovK, 0, 1);
+
+		if (Input.IsKeyPressed(Key.Y))
+		{
+			Rotation += Mathf.Pi * delta / 4;
+		}
+		if (Input.IsKeyPressed(Key.U))
+		{
+			Rotation -= Mathf.Pi * delta / 4;
+		}
 	}
 
 	public void RefreshCameraPosition()
 	{
-		var OffsetDirection = new Vector3(0, Mathf.Sin(Angle), Mathf.Cos(Angle));
+		var x = Mathf.Cos(Angle) * Mathf.Sin(Rotation);
+		var y = Mathf.Sin(Angle);
+		var z = Mathf.Cos(Angle) * Mathf.Cos(Rotation);
+		var OffsetDirection = new Vector3(x, y, z);
 		
 		Camera.Projection = IsOrthogonal ? Camera3D.ProjectionType.Orthogonal : Camera3D.ProjectionType.Perspective;
 		Camera.Size = VisibleAreaLength * Mathf.Sin(Angle);
