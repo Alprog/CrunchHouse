@@ -20,7 +20,7 @@ public partial class Grid : Node3D
 	{
 		ProcessInput();
 		ProcessMouse();
-		TileMap.Sync();
+		TileMap.Sync();		
 	}
 
 	public void ProcessMouse()
