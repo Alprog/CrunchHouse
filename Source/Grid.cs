@@ -25,6 +25,18 @@ public partial class Grid : Node3D
 
 	public void ProcessMouse()
 	{
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
+		{
+			SetTileUnderMouse(4);
+		}
+		if (Input.IsMouseButtonPressed(MouseButton.Right))
+		{
+			SetTileUnderMouse(0);
+		}
+	}
+
+	public void SetTileUnderMouse(int tileIndex)
+	{
 		var screenPosition = GetViewport().GetMousePosition();
 		var rayOrigin = Camera.ProjectRayOrigin(screenPosition);
 		var rayDirection = Camera.ProjectRayNormal(screenPosition);
@@ -36,7 +48,7 @@ public partial class Grid : Node3D
 		int x = (int)collisionPosition.X;
 		int z = (int)collisionPosition.Z;
 
-		TileMap.SetTileIndex(x, z, 4);
+		TileMap.SetTileIndex(x, z, tileIndex);
 	}
 
 	public void ProcessInput()
