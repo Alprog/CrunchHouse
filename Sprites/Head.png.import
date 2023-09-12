@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwiyjcnc22rch"
-path.s3tc="res://.godot/imported/Head.png-dc0e33164240daf6141adb9824740393.s3tc.ctex"
+path.s3tc="res://.godot/imported/Head.png-d7791035c89fa0bfb3bbe4efdd40504f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Head.png"
-dest_files=["res://.godot/imported/Head.png-dc0e33164240daf6141adb9824740393.s3tc.ctex"]
+source_file="res://sprites/Head.png"
+dest_files=["res://.godot/imported/Head.png-d7791035c89fa0bfb3bbe4efdd40504f.s3tc.ctex"]
 
 [params]
 
