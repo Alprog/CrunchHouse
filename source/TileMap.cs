@@ -16,12 +16,16 @@ public class TileMap
         Texture = ImageTexture.CreateFromImage(Image);
     }
 
-    public Vector2I Size => new Vector2I(Data.GetLength(0), Data.GetLength(1));
+    public VectorXZI Size => new VectorXZI(Data.GetLength(0), Data.GetLength(1));
+
+    public int GetTileIndex(VectorXZI crd) => GetTileIndex(crd.X, crd.Z);
 
     public int GetTileIndex(int x, int z)
     {
         return Data[x, z];
     }
+
+    public void SetTileIndex(VectorXZI crd, int index) => SetTileIndex(crd.X, crd.Z, index);
 
     public void SetTileIndex(int x, int z, int index)
     {

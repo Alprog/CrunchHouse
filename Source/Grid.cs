@@ -5,7 +5,7 @@ public partial class Grid : Node3D
 {
 	[Export] public Camera3D Camera;
 	public TileMap TileMap;
-	public Vector2I Pos;
+	public VectorXZI Pos;
 
 	public override void _Ready()
 	{
@@ -43,7 +43,7 @@ public partial class Grid : Node3D
 	{
 		if (Input.IsKeyPressed(Key.I))
 		{
-			Pos.Y -= 1;
+			Pos.Z -= 1;
 			MarkCurrent();
 		}
 		if (Input.IsKeyPressed(Key.J))
@@ -53,7 +53,7 @@ public partial class Grid : Node3D
 		}
 		if (Input.IsKeyPressed(Key.K))
 		{
-			Pos.Y += 1;
+			Pos.Z += 1;
 			MarkCurrent();
 		}
 		if (Input.IsKeyPressed(Key.L))
@@ -65,7 +65,7 @@ public partial class Grid : Node3D
 
 	public void MarkCurrent()
 	{
-		TileMap.SetTileIndex(Pos.X, Pos.Y, 2);
+		TileMap.SetTileIndex(Pos, 2);
 	}
 
 	public Mesh CreateMesh()
@@ -73,7 +73,7 @@ public partial class Grid : Node3D
 		var builder = new MeshBuilder();
 		
 		var size = TileMap.Size;
-		for (int z = 0; z < size.Y; z++)
+		for (int z = 0; z < size.Z; z++)
 		{			
 			for (int x = 0; x < size.X; x++)
 			{
