@@ -1,59 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://blahsvhhqibms"]
+[gd_scene load_steps=4 format=3 uid="uid://blahsvhhqibms"]
 
 [ext_resource type="Script" path="res://source/CameraManager.cs" id="1_4pyal"]
 [ext_resource type="PackedScene" uid="uid://c2go40oph8wlr" path="res://World.tscn" id="1_f67kl"]
+[ext_resource type="Script" path="res://Main.cs" id="1_xr38m"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("SecondWindow")]
+script = ExtResource("1_xr38m")
+SecondWindow = NodePath("Window")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="3DView" type="SubViewportContainer" parent="Control"]
+[node name="3DView" type="SubViewportContainer" parent="."]
 offset_right = 597.0
 offset_bottom = 436.0
 
-[node name="SubViewport" type="SubViewport" parent="Control/3DView"]
+[node name="SubViewport" type="SubViewport" parent="3DView"]
 handle_input_locally = false
 size = Vector2i(597, 436)
 render_target_update_mode = 4
 
-[node name="CameraManager" type="Node3D" parent="Control/3DView/SubViewport" node_paths=PackedStringArray("Camera")]
+[node name="CameraManager" type="Node3D" parent="3DView/SubViewport" node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_4pyal")
 Camera = NodePath("Camera")
 
-[node name="Camera" type="Camera3D" parent="Control/3DView/SubViewport/CameraManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
-projection = 1
-current = true
-fov = 10.0
-size = 11.38
-near = 0.1
-far = 500.0
-
-[node name="Button2" type="Button" parent="."]
-offset_left = 53.0
-offset_top = 68.0
-offset_right = 122.0
-offset_bottom = 99.0
-text = "efefefef"
-
-[node name="3DView2" type="SubViewportContainer" parent="."]
-offset_left = 543.0
-offset_top = 188.0
-offset_right = 1140.0
-offset_bottom = 624.0
-
-[node name="SubViewport" type="SubViewport" parent="3DView2"]
-size = Vector2i(597, 436)
-
-[node name="CameraManager" type="Node3D" parent="3DView2/SubViewport" node_paths=PackedStringArray("Camera")]
-script = ExtResource("1_4pyal")
-Camera = NodePath("Camera")
-
-[node name="Camera" type="Camera3D" parent="3DView2/SubViewport/CameraManager"]
+[node name="Camera" type="Camera3D" parent="3DView/SubViewport/CameraManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
 projection = 1
 current = true
@@ -63,3 +31,31 @@ near = 0.1
 far = 500.0
 
 [node name="World" parent="." instance=ExtResource("1_f67kl")]
+
+[node name="WindowButton" type="Button" parent="."]
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 51.0
+text = "Second Window"
+
+[node name="Window" type="Window" parent="."]
+mode = 2
+initial_position = 3
+current_screen = 1
+visible = false
+
+[node name="CameraManager" type="Node3D" parent="Window" node_paths=PackedStringArray("Camera")]
+script = ExtResource("1_4pyal")
+Camera = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="Window/CameraManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
+projection = 1
+current = true
+fov = 10.0
+size = 11.38
+near = 0.1
+far = 500.0
+
+[connection signal="pressed" from="WindowButton" to="." method="OnWindowButtonPressed"]
