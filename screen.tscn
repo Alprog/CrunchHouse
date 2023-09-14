@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://blahsvhhqibms"]
+[gd_scene load_steps=5 format=3 uid="uid://blahsvhhqibms"]
 
 [ext_resource type="Script" path="res://source/CameraManager.cs" id="1_4pyal"]
 [ext_resource type="PackedScene" uid="uid://c2go40oph8wlr" path="res://World.tscn" id="1_f67kl"]
 [ext_resource type="Script" path="res://Main.cs" id="1_xr38m"]
+[ext_resource type="PackedScene" uid="uid://6mfylbntd8p0" path="res://second_window.tscn" id="4_k0jko"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("SecondWindow")]
 script = ExtResource("1_xr38m")
@@ -39,23 +40,18 @@ offset_right = 84.0
 offset_bottom = 51.0
 text = "Second Window"
 
-[node name="Window" type="Window" parent="."]
-mode = 2
-initial_position = 3
-current_screen = 1
+[node name="CloseButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1893.0
+offset_right = 1920.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = " X "
+
+[node name="Window" parent="." instance=ExtResource("4_k0jko")]
 visible = false
 
-[node name="CameraManager" type="Node3D" parent="Window" node_paths=PackedStringArray("Camera")]
-script = ExtResource("1_4pyal")
-Camera = NodePath("Camera")
-
-[node name="Camera" type="Camera3D" parent="Window/CameraManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
-projection = 1
-current = true
-fov = 10.0
-size = 11.38
-near = 0.1
-far = 500.0
-
 [connection signal="pressed" from="WindowButton" to="." method="OnWindowButtonPressed"]
+[connection signal="pressed" from="CloseButton" to="." method="OnCloseButtonPressed"]

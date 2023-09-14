@@ -16,4 +16,9 @@ public partial class Main : Node2D
 	{
 		SecondWindow.Visible ^= true;
 	}
+
+	public void OnCloseButtonPressed()
+	{
+		GetTree().Quit();
+	}
 }
