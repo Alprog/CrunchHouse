@@ -5,24 +5,52 @@
 [ext_resource type="Script" path="res://Main.cs" id="1_xr38m"]
 [ext_resource type="PackedScene" uid="uid://6mfylbntd8p0" path="res://scenes/second_window.tscn" id="4_k0jko"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("SecondWindow")]
+[node name="Main3" type="Control" node_paths=PackedStringArray("SecondWindow")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_xr38m")
 SecondWindow = NodePath("Window")
 
-[node name="3DView" type="SubViewportContainer" parent="."]
-offset_right = 597.0
-offset_bottom = 436.0
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.309804, 0.0823529, 0.0862745, 1)
 
-[node name="SubViewport" type="SubViewport" parent="3DView"]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 470
+
+[node name="ColorRect" type="ColorRect" parent="HSplitContainer"]
+layout_mode = 2
+color = Color(0.0470588, 0.117647, 0.105882, 1)
+
+[node name="3DView" type="SubViewportContainer" parent="HSplitContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HSplitContainer/3DView"]
 handle_input_locally = false
-size = Vector2i(597, 436)
+size = Vector2i(478, 512)
 render_target_update_mode = 4
 
-[node name="CameraManager" type="Node3D" parent="3DView/SubViewport" node_paths=PackedStringArray("Camera")]
+[node name="CameraManager" type="Node3D" parent="HSplitContainer/3DView/SubViewport" node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_4pyal")
 Camera = NodePath("Camera")
 
-[node name="Camera" type="Camera3D" parent="3DView/SubViewport/CameraManager"]
+[node name="Camera" type="Camera3D" parent="HSplitContainer/3DView/SubViewport/CameraManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
 projection = 1
 current = true
@@ -34,13 +62,15 @@ far = 500.0
 [node name="World" parent="." instance=ExtResource("1_f67kl")]
 
 [node name="WindowButton" type="Button" parent="."]
-offset_left = 15.0
-offset_top = 20.0
-offset_right = 84.0
-offset_bottom = 51.0
+layout_mode = 0
+offset_left = 20.0
+offset_top = 24.0
+offset_right = 151.0
+offset_bottom = 55.0
 text = "Second Window"
 
 [node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

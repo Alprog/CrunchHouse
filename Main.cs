@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Main : Node2D
+public partial class Main : Control
 {
 	[Export] Window SecondWindow;
 	
