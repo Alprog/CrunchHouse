@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://blahsvhhqibms"]
 
 [ext_resource type="Script" path="res://source/CameraManager.cs" id="1_4pyal"]
-[ext_resource type="PackedScene" uid="uid://c2go40oph8wlr" path="res://World.tscn" id="1_f67kl"]
+[ext_resource type="PackedScene" uid="uid://c2go40oph8wlr" path="res://scenes/world.tscn" id="1_f67kl"]
 [ext_resource type="Script" path="res://Main.cs" id="1_xr38m"]
-[ext_resource type="PackedScene" uid="uid://6mfylbntd8p0" path="res://second_window.tscn" id="4_k0jko"]
+[ext_resource type="PackedScene" uid="uid://6mfylbntd8p0" path="res://scenes/second_window.tscn" id="4_k0jko"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("SecondWindow")]
 script = ExtResource("1_xr38m")
