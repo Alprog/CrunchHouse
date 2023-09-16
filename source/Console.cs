@@ -1,7 +1,7 @@
 using DarkCrystal.CommandLine;
 using Godot;
 using System;
-using System.Security.Cryptography;
+using System.Collections.Generic;
 
 public partial class Console : VSplitContainer
 {
@@ -10,6 +10,7 @@ public partial class Console : VSplitContainer
 	private LineEdit CommandLineEdit => FindChild("CommandLineEdit") as LineEdit;
 	private RichTextLabel Output => FindChild("Output") as RichTextLabel;
 
+	private ConsoleHistory History = new ConsoleHistory();
 	private bool SkipNextAutoComplete = false;
 
 	public override void _Input(InputEvent @event)
@@ -26,6 +27,7 @@ public partial class Console : VSplitContainer
 						break;
 
 					case Key.Enter:
+						History.Add(CommandLineEdit.Text);
 						Output.Text += "\n" + CommandLineEdit.Text;
 						Output.ScrollToLine(Int32.MaxValue);
 						CommandLineEdit.Clear();
@@ -36,6 +38,24 @@ public partial class Console : VSplitContainer
 						CommandLineEdit.Deselect();
 						CommandLineEdit.CaretColumn = CommandLineEdit.Text.Length;
 						AcceptEvent();
+						break;
+
+					case Key.Up:
+						if (!History.Empty)
+						{
+							CommandLineEdit.Text = History.MoveBack();
+							SetCaretToEnd();
+							AcceptEvent();						
+						}
+						break;
+
+					case Key.Down:
+						if (!History.Empty)
+						{
+							CommandLineEdit.Text = History.MoveForward();
+							SetCaretToEnd();
+							AcceptEvent();
+						}
 						break;
 
 					case Key.Delete:
@@ -76,12 +96,15 @@ public partial class Console : VSplitContainer
 		}		
 	}
 
+	private static int EditingFromCode = 0;
+
 	private void OnCommandLineEditChanged(String text)
 	{
-		PerformAutoComplete();
-	}
-
-	private static bool AutoCompleting = false;
+		if (EditingFromCode == 0)
+		{
+			PerformAutoComplete();
+		}
+	}	
 
 	private void PerformAutoComplete()
 	{
@@ -91,12 +114,9 @@ public partial class Console : VSplitContainer
 			return;
 		}
 
-		if (!AutoCompleting)
-		{
-			AutoCompleting = true;
-			PerformAutoCompleteInternal();
-			AutoCompleting = false;
-		}
+		EditingFromCode++;
+		PerformAutoCompleteInternal();
+		EditingFromCode--;
 	}
 
 	private void PerformAutoCompleteInternal()
@@ -107,7 +127,12 @@ public partial class Console : VSplitContainer
 		{
 			CommandLineEdit.Text = baseText + completedText;
 			CommandLineEdit.Select(baseText.Length);
-			CommandLineEdit.CaretColumn = CommandLineEdit.Text.Length;
+			SetCaretToEnd();
 		}
+	}
+
+	private void SetCaretToEnd()
+	{
+		CommandLineEdit.CaretColumn = CommandLineEdit.Text.Length;
 	}
 }
