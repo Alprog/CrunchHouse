@@ -28,15 +28,9 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
+[node name="Output" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Line1
-Line2
-Line3
-Line4
-Line5
-Line6"
 autowrap_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]

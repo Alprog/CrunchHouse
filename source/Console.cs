@@ -3,15 +3,28 @@ using System;
 
 public partial class Console : VSplitContainer
 {
+	private LineEdit CommandLine => FindChild("CommandLine") as LineEdit;
+	private RichTextLabel Output => FindChild("Output") as RichTextLabel;
+	
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventKey eventKey)
 		{
-			if (@event.IsPressed() && eventKey.Keycode == Key.Quoteleft)
+			if (@event.IsPressed())
 			{
-				Toggle();
-				AcceptEvent();
-			}
+				if (eventKey.Keycode == Key.Quoteleft)
+				{
+					Toggle();
+					AcceptEvent();
+				}
+				if (eventKey.Keycode == Key.Enter)
+				{
+					Output.Text += "\n" + CommandLine.Text;
+					Output.ScrollToLine(Int32.MaxValue);
+					CommandLine.Clear();
+					AcceptEvent();
+				}
+			}			
 		}
 
 		if (Visible)
@@ -33,15 +46,14 @@ public partial class Console : VSplitContainer
 
 	public void Toggle()
 	{
-		var commandLine = FindChild("CommandLine") as LineEdit;
 		Visible ^= true;
 		if (Visible)
 		{
-			commandLine.GrabFocus();
+			CommandLine.GrabFocus();
 		}
 		else
 		{
-			commandLine.ReleaseFocus();
+			CommandLine.ReleaseFocus();
 		}		
 	}
 }
