@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk0xy5umrbnvu"]
+
+[ext_resource type="Script" path="res://source/Console.cs" id="1_n634e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3uvwe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66s8f"]
+
+[node name="Console" type="VSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 190
+script = ExtResource("1_n634e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 0.556863)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Line1
+Line2
+Line3
+Line4
+Line5
+Line6"
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = " >"
+
+[node name="CommandLine" type="LineEdit" parent="ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3uvwe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_66s8f")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3

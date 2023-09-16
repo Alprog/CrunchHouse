@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://blahsvhhqibms"]
+[gd_scene load_steps=6 format=3 uid="uid://blahsvhhqibms"]
 
 [ext_resource type="Script" path="res://source/CameraManager.cs" id="1_4pyal"]
 [ext_resource type="PackedScene" uid="uid://c2go40oph8wlr" path="res://scenes/world.tscn" id="1_f67kl"]
 [ext_resource type="Script" path="res://Main.cs" id="1_xr38m"]
+[ext_resource type="PackedScene" uid="uid://dk0xy5umrbnvu" path="res://scenes/console.tscn" id="4_324uh"]
 [ext_resource type="PackedScene" uid="uid://6mfylbntd8p0" path="res://scenes/second_window.tscn" id="4_k0jko"]
 
-[node name="Main3" type="Control" node_paths=PackedStringArray("SecondWindow")]
+[node name="Main" type="Control" node_paths=PackedStringArray("SecondWindow")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +15,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xr38m")
 SecondWindow = NodePath("Window")
+
+[node name="World" parent="." instance=ExtResource("1_f67kl")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -31,7 +34,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offset = 470
 
 [node name="ColorRect" type="ColorRect" parent="HSplitContainer"]
 layout_mode = 2
@@ -43,7 +45,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HSplitContainer/3DView"]
 handle_input_locally = false
-size = Vector2i(478, 512)
+size = Vector2i(1908, 1024)
 render_target_update_mode = 4
 
 [node name="CameraManager" type="Node3D" parent="HSplitContainer/3DView/SubViewport" node_paths=PackedStringArray("Camera")]
@@ -59,14 +61,15 @@ size = 11.38
 near = 0.1
 far = 500.0
 
-[node name="World" parent="." instance=ExtResource("1_f67kl")]
+[node name="Console" parent="." instance=ExtResource("4_324uh")]
+visible = false
+layout_mode = 1
 
 [node name="WindowButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 24.0
-offset_right = 151.0
-offset_bottom = 55.0
+offset_left = 26.42
+offset_right = 157.42
+offset_bottom = 31.0
 text = "Second Window"
 
 [node name="CloseButton" type="Button" parent="."]
@@ -74,8 +77,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1893.0
-offset_right = 1920.0
+offset_left = -27.0
 offset_bottom = 31.0
 grow_horizontal = 0
 text = " X "
