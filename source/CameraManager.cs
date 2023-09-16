@@ -37,12 +37,16 @@ public partial class CameraManager : Node3D
 
 	public override void _Process(double delta)
 	{
-		ProcessInput((float)delta);
 		RefreshCameraPosition();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		if (@event is UpdateEvent @updateEvent)
+		{
+			ProcessInput(updateEvent.DeltaTime);
+		}
+
 		var mouseEvent = @event as InputEventMouseButton;
 		if (mouseEvent != null && mouseEvent.IsPressed())
 		{

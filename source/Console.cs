@@ -13,6 +13,14 @@ public partial class Console : VSplitContainer
 				AcceptEvent();
 			}
 		}
+
+		if (Visible)
+		{
+			if (@event is UpdateEvent @updateEvent)
+			{
+				AcceptEvent();
+			}
+		}
 	}
 
 	public override void _GuiInput(InputEvent @event)
