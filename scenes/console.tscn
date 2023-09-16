@@ -40,7 +40,7 @@ layout_mode = 2
 layout_mode = 2
 text = " >"
 
-[node name="CommandLine" type="LineEdit" parent="ColorRect/VBoxContainer/HBoxContainer"]
+[node name="CommandLineEdit" type="LineEdit" parent="ColorRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3uvwe")
@@ -49,3 +49,5 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_66s8f")
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
+
+[connection signal="text_changed" from="ColorRect/VBoxContainer/HBoxContainer/CommandLineEdit" to="." method="OnCommandLineEditChanged"]

@@ -1,29 +1,48 @@
+using DarkCrystal.CommandLine;
 using Godot;
 using System;
+using System.Security.Cryptography;
 
 public partial class Console : VSplitContainer
 {
-	private LineEdit CommandLine => FindChild("CommandLine") as LineEdit;
+	public CommandLine CommandLine = new CommandLine(new DefaultGlobalResolver());
+
+	private LineEdit CommandLineEdit => FindChild("CommandLineEdit") as LineEdit;
 	private RichTextLabel Output => FindChild("Output") as RichTextLabel;
-	
+
+	private bool SkipNextAutoComplete = false;
+
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventKey eventKey)
 		{
 			if (@event.IsPressed())
 			{
-				if (eventKey.Keycode == Key.Quoteleft)
+				switch (eventKey.Keycode)
 				{
-					Toggle();
-					AcceptEvent();
-				}
-				if (eventKey.Keycode == Key.Enter)
-				{
-					Output.Text += "\n" + CommandLine.Text;
-					Output.ScrollToLine(Int32.MaxValue);
-					CommandLine.Clear();
-					AcceptEvent();
-				}
+					case Key.Quoteleft:
+						Toggle();
+						AcceptEvent();
+						break;
+
+					case Key.Enter:
+						Output.Text += "\n" + CommandLineEdit.Text;
+						Output.ScrollToLine(Int32.MaxValue);
+						CommandLineEdit.Clear();
+						AcceptEvent();
+						break;
+
+					case Key.Tab:
+						CommandLineEdit.Deselect();
+						CommandLineEdit.CaretColumn = CommandLineEdit.Text.Length;
+						AcceptEvent();
+						break;
+
+					case Key.Delete:
+					case Key.Backspace:
+						SkipNextAutoComplete = true;
+						break;
+				}				
 			}			
 		}
 
@@ -49,11 +68,46 @@ public partial class Console : VSplitContainer
 		Visible ^= true;
 		if (Visible)
 		{
-			CommandLine.GrabFocus();
+			CommandLineEdit.GrabFocus();
 		}
 		else
 		{
-			CommandLine.ReleaseFocus();
+			CommandLineEdit.ReleaseFocus();
 		}		
+	}
+
+	private void OnCommandLineEditChanged(String text)
+	{
+		PerformAutoComplete();
+	}
+
+	private static bool AutoCompleting = false;
+
+	private void PerformAutoComplete()
+	{
+		if (SkipNextAutoComplete)
+		{
+			SkipNextAutoComplete = false;
+			return;
+		}
+
+		if (!AutoCompleting)
+		{
+			AutoCompleting = true;
+			PerformAutoCompleteInternal();
+			AutoCompleting = false;
+		}
+	}
+
+	private void PerformAutoCompleteInternal()
+	{
+		var baseText = CommandLineEdit.Text;
+		var completedText = CommandLine.AutoComplete(baseText);
+		if (completedText != String.Empty)
+		{
+			CommandLineEdit.Text = baseText + completedText;
+			CommandLineEdit.Select(baseText.Length);
+			CommandLineEdit.CaretColumn = CommandLineEdit.Text.Length;
+		}
 	}
 }

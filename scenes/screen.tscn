@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://blahsvhhqibms"]
+[gd_scene load_steps=6 format=3 uid="uid://c2ygujislnc6l"]
 
 [ext_resource type="Script" path="res://source/CameraManager.cs" id="1_4pyal"]
 [ext_resource type="PackedScene" uid="uid://c2go40oph8wlr" path="res://scenes/world.tscn" id="1_f67kl"]

@@ -1,7 +1,7 @@
 
 using Godot;
 
-public partial class UpdateEvent : InputEventKey
+public partial class UpdateEvent : InputEventAction
 {
     public float DeltaTime;
 

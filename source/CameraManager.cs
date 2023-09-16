@@ -4,8 +4,11 @@ using System.Runtime.CompilerServices;
 
 public partial class CameraManager : Node3D
 {
-	public Vector3 FocusPosition;
+	public static int i = 0;
+	public String NameTag;
 
+	public Vector3 FocusPosition;
+	
 	public const float PanningScreenPerSecond = 1.0f;
 
 	public const float MinCellCount = 10.0f;
@@ -33,6 +36,7 @@ public partial class CameraManager : Node3D
 
 	public override void _Ready()
 	{
+		NameTag = "Camera" + (++i).ToString();
 	}
 
 	public override void _Process(double delta)
@@ -42,6 +46,8 @@ public partial class CameraManager : Node3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		//GD.Print(NameTag + " " + @event.GetType().Name);
+
 		if (@event is UpdateEvent @updateEvent)
 		{
 			ProcessInput(updateEvent.DeltaTime);
