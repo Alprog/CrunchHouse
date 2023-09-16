@@ -34,10 +34,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+split_offset = 905
 
-[node name="ColorRect" type="ColorRect" parent="HSplitContainer"]
+[node name="3DView2" type="SubViewportContainer" parent="HSplitContainer"]
 layout_mode = 2
-color = Color(0.0470588, 0.117647, 0.105882, 1)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HSplitContainer/3DView2"]
+handle_input_locally = false
+size = Vector2i(905, 1024)
+render_target_update_mode = 4
+
+[node name="CameraManager" type="Control" parent="HSplitContainer/3DView2/SubViewport" node_paths=PackedStringArray("Camera")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4pyal")
+Camera = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="HSplitContainer/3DView2/SubViewport/CameraManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
+projection = 1
+current = true
+fov = 10.0
+size = 11.38
+near = 0.1
+far = 500.0
 
 [node name="3DView" type="SubViewportContainer" parent="HSplitContainer"]
 layout_mode = 2
@@ -45,10 +66,12 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HSplitContainer/3DView"]
 handle_input_locally = false
-size = Vector2i(1908, 1024)
+size = Vector2i(1003, 1024)
 render_target_update_mode = 4
 
-[node name="CameraManager" type="Node3D" parent="HSplitContainer/3DView/SubViewport" node_paths=PackedStringArray("Camera")]
+[node name="CameraManager" type="Control" parent="HSplitContainer/3DView/SubViewport" node_paths=PackedStringArray("Camera")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_4pyal")
 Camera = NodePath("Camera")
 
@@ -60,6 +83,12 @@ fov = 10.0
 size = 11.38
 near = 0.1
 far = 500.0
+
+[node name="Button" type="Button" parent="HSplitContainer/3DView/SubViewport/CameraManager"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "efefef"
 
 [node name="Console" parent="." instance=ExtResource("4_324uh")]
 visible = false
@@ -84,6 +113,7 @@ grow_horizontal = 0
 text = " X "
 
 [node name="Window" parent="." instance=ExtResource("4_k0jko")]
+mode = 0
 visible = false
 
 [connection signal="pressed" from="WindowButton" to="." method="OnWindowButtonPressed"]

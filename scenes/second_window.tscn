@@ -18,7 +18,9 @@ offset_bottom = 31.0
 grow_horizontal = 0
 text = " X "
 
-[node name="CameraManager" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
+[node name="CameraManager" type="Control" parent="." node_paths=PackedStringArray("Camera")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_tjkk7")
 Camera = NodePath("Camera")
 

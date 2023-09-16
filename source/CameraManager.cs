@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class CameraManager : Node3D
+public partial class CameraManager : Control
 {
 	public static int i = 0;
 	public String NameTag;
@@ -44,13 +44,23 @@ public partial class CameraManager : Node3D
 		RefreshCameraPosition();
 	}
 
+	static int ii = 0;
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventMouseMotion mmEvent)
+		{
+			GD.Print(NameTag + " " + (ii++).ToString());
+		}
+	}
+
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		//GD.Print(NameTag + " " + @event.GetType().Name);
 
-		if (@event is UpdateEvent @updateEvent)
+		if (@event is UpdateEvent updateEvent)
 		{
 			ProcessInput(updateEvent.DeltaTime);
+			AcceptEvent();						
 		}
 
 		var mouseEvent = @event as InputEventMouseButton;
