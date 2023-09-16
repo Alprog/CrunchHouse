@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2go40oph8wlr"]
+[gd_scene load_steps=9 format=3 uid="uid://c2go40oph8wlr"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://sprites/head.png" id="1_3n1m8"]
 [ext_resource type="Script" path="res://source/Grid.cs" id="2_xw21y"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://sprites/body.png" id="3_aabbw"]
 [ext_resource type="Script" path="res://source/Developer.cs" id="4_j5tsv"]
-[ext_resource type="Script" path="res://source/FPSLabel.cs" id="6_7btuf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yen45"]
 
@@ -55,8 +54,3 @@ shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 0.0
-
-[node name="FPSLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("6_7btuf")

@@ -27,7 +27,7 @@ namespace DarkCrystal.CommandLine
             {
                 tokenString = "…";
             }
-            return String.Format("{0}<b><color=red>{1}</color></b>{2}", startString, tokenString, endString);
+            return String.Format("{0}[b][color=red]{1}[/color][/b]{2}", startString, tokenString, endString);
         }
     }
 }

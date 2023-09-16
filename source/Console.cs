@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public partial class Console : VSplitContainer
 {
-	public CommandLine CommandLine = new CommandLine(new DefaultGlobalResolver());
-
 	private LineEdit CommandLineEdit => FindChild("CommandLineEdit") as LineEdit;
 	private RichTextLabel Output => FindChild("Output") as RichTextLabel;
 
@@ -28,7 +26,7 @@ public partial class Console : VSplitContainer
 
 					case Key.Enter:
 						History.Add(CommandLineEdit.Text);
-						Output.Text += "\n" + CommandLineEdit.Text;
+						Run(CommandLineEdit.Text);
 						Output.ScrollToLine(Int32.MaxValue);
 						CommandLineEdit.Clear();
 						AcceptEvent();
@@ -96,6 +94,22 @@ public partial class Console : VSplitContainer
 		}		
 	}
 
+	private void Run(string line)
+	{
+		Output.Text += "\n > " + line; 
+
+		string ResultString = null;
+		try
+		{
+			ResultString = The.CommandLine.Execute(line)?.ToString();
+		}
+		catch (Exception exception)
+		{
+			ResultString = exception.InnerException?.Message ?? exception.Message;
+		}
+		Output.Text += "\n" + ResultString;
+	}
+
 	private static int EditingFromCode = 0;
 
 	private void OnCommandLineEditChanged(String text)
@@ -122,7 +136,7 @@ public partial class Console : VSplitContainer
 	private void PerformAutoCompleteInternal()
 	{
 		var baseText = CommandLineEdit.Text;
-		var completedText = CommandLine.AutoComplete(baseText);
+		var completedText = The.CommandLine.AutoComplete(baseText);
 		if (completedText != String.Empty)
 		{
 			CommandLineEdit.Text = baseText + completedText;
