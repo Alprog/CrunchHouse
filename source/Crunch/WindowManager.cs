@@ -62,13 +62,13 @@ namespace Crunch
         {
             for (int i = Windows.Count - 1; i >= 0; i--)
             {
-                var window = Windows[i];
-                if (window.IsMouseAtWindow())
+                var godotWindow = Windows[i].GodotWindow;
+                if (godotWindow.IsMouseAtWindow())
                 {
-                    var id = window.GodotWindow.GetWindowId();
+                    var id = godotWindow.GetWindowId();
                     if (!DisplayServer.WindowIsFocused(id))
                     {
-                        window.GodotWindow.GrabFocus();
+                        godotWindow.GrabFocus();
                     }
                 }
             }

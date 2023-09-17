@@ -31,5 +31,11 @@ namespace Crunch
             }
             return Vector2I.Zero;
         }
+
+        public static bool IsMouseAtWindow(this Viewport viewport)
+        {
+            var rect = new Rect2I(Vector2I.Zero, viewport.GetSize());
+            return rect.HasPoint(viewport.GetMousePosition().ToVector2I());
+        }
     }
 }

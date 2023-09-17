@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://j7im2edx6ylp"]
+[gd_scene load_steps=3 format=3 uid="uid://j7im2edx6ylp"]
 
+[ext_resource type="Script" path="res://source/Crunch/View3D.cs" id="1_cv32o"]
 [ext_resource type="Script" path="res://source/Crunch/CameraManager.cs" id="1_yf4ls"]
 
 [node name="3DView" type="SubViewportContainer"]
 stretch = true
+script = ExtResource("1_cv32o")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false

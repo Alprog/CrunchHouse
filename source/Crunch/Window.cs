@@ -15,13 +15,6 @@ namespace Crunch
             //AddChild(console);
         }
 
-        public bool IsMouseAtWindow()
-        {
-            var godotWindow = GodotWindow;
-            var rect = new Rect2I(Vector2I.Zero, godotWindow.Size);
-            return rect.HasPoint(godotWindow.GetMousePosition().ToVector2I());
-        }
-
         public void OnCloseButtonPressed()
         {
             The.WindowManager.CloseWindow(this);
