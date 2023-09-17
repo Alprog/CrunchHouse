@@ -1,0 +1,1 @@
+start ./../Godot-bin/Godot_v4.1.1-stable_mono_win64.exe
