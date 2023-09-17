@@ -13,13 +13,14 @@ config_version=5
 config/name="Crunch House"
 run/main_scene="res://scenes/application.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+boot_splash/image="res://docs/title.png"
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1024
-window/size/mode=2
+window/size/viewport_width=584
+window/size/viewport_height=310
+window/size/borderless=true
 window/subwindows/embed_subwindows=false
 
 [dotnet]

@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace Crunch
@@ -13,14 +14,14 @@ namespace Crunch
         {
             var currentNode = The.Application.GetNode();
            
-            if (Windows.Count > 0)
+            //if (Windows.Count > 0)
             {
                 var godotWindow = new Godot.Window 
                 { 
                     Name = "GodotWindow",
                     Mode = Godot.Window.ModeEnum.Fullscreen,
                     InitialPosition = Godot.Window.WindowInitialPosition.CenterOtherScreen,
-                    CurrentScreen = 1
+                    CurrentScreen = Windows.Count
                 };
                 currentNode.AddChild(godotWindow);
                 currentNode = godotWindow;
@@ -44,6 +45,11 @@ namespace Crunch
             {
                 Windows.Remove(window);
                 window.GodotWindow.QueueFree();
+            }
+
+            if (Windows.Count == 0)
+            {
+                The.Application.Quit();
             }
         }
 
@@ -78,9 +84,10 @@ namespace Crunch
                         godotWindow.GrabFocus();
                     }
                     FocusedWindow = Windows[i];
-                    break;
+                    return;
                 }
-            }    
+            } 
+            FocusedWindow = Windows.First();
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Crunch
 
 		public override void _Ready()
 		{
+			DisplayServer.WindowSetSize(Vector2I.One, GetWindow().GetWindowId());
+
 			base._Ready();
 			World = Utils.InstantinateScene("world") as World;
 			AddChild(World);
