@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dk0xy5umrbnvu"]
 
-[ext_resource type="Script" path="res://source/Console.cs" id="1_n634e"]
+[ext_resource type="Script" path="res://source/Crunch/Console.cs" id="1_n634e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3uvwe"]
 

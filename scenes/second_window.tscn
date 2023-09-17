@@ -1,36 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://6mfylbntd8p0"]
+[gd_scene load_steps=2 format=3 uid="uid://6mfylbntd8p0"]
 
-[ext_resource type="Script" path="res://source/SecondWindow.cs" id="1_mpmyj"]
-[ext_resource type="Script" path="res://source/CameraManager.cs" id="1_tjkk7"]
+[ext_resource type="PackedScene" uid="uid://ccjhqdd40boki" path="res://scenes/window_root.tscn" id="1_qpuk1"]
 
 [node name="Window" type="Window"]
 mode = 3
 position = Vector2i(0, 36)
 size = Vector2i(1920, 1024)
-script = ExtResource("1_mpmyj")
 
-[node name="CloseButton" type="Button" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -27.0
-offset_bottom = 31.0
-grow_horizontal = 0
-text = " X "
-
-[node name="CameraManager" type="Control" parent="." node_paths=PackedStringArray("Camera")]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_tjkk7")
-Camera = NodePath("Camera")
-
-[node name="Camera" type="Camera3D" parent="CameraManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
-projection = 1
-current = true
-fov = 10.0
-size = 11.38
-near = 0.1
-far = 500.0
-
-[connection signal="pressed" from="CloseButton" to="." method="OnCloseButtonPressed"]
+[node name="WindowRoot" parent="." instance=ExtResource("1_qpuk1")]

@@ -1,4 +1,4 @@
-using System;
+
 using Godot;
 
 public partial class Main : Control
@@ -7,8 +7,8 @@ public partial class Main : Control
 	
 	public override void _Process(double delta)
 	{
-		var @event = new UpdateEvent(delta);
-		Input.ParseInputEvent(@event);
+		//var @event = new UpdateEvent(delta);
+		//Input.ParseInputEvent(@event);
 	}
 
 	public void OnWindowButtonPressed()
