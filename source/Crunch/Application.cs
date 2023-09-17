@@ -5,10 +5,13 @@ namespace Crunch
 {
 	public partial class Application : SingletonNode<Application>
 	{
+		public World World { get; private set; }
+
 		public override void _Ready()
 		{
 			base._Ready();
-			AddChild(Utils.InstantinateScene("world"));
+			World = Utils.InstantinateScene("world") as World;
+			AddChild(World);
 			The.WindowManager.CreateNewWindow();
 			The.WindowManager.CreateNewWindow();
 		}
@@ -17,6 +20,7 @@ namespace Crunch
 		{
 			float deltaTime = (float)delta;
 			The.WindowManager.Update(deltaTime);
+			World.Update(deltaTime);
 		}
 
 		public Node GetNode()

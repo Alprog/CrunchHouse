@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckr8frxqeodl6"]
+[gd_scene load_steps=10 format=3 uid="uid://ckr8frxqeodl6"]
 
 [ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://sprites/head.png" id="1_3n1m8"]
+[ext_resource type="Script" path="res://source/Crunch/World.cs" id="1_luxl6"]
 [ext_resource type="Script" path="res://source/Crunch/Grid.cs" id="2_xw21y"]
 [ext_resource type="Texture2D" uid="uid://8agtebi0l426" path="res://sprites/body.png" id="3_aabbw"]
 [ext_resource type="Script" path="res://source/Crunch/Developer.cs" id="4_j5tsv"]
@@ -26,6 +27,7 @@ rim_tint = 1.0
 backlight = Color(0.733333, 0.34902, 0, 1)
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_luxl6")
 
 [node name="Grid" type="Node3D" parent="."]
 script = ExtResource("2_xw21y")

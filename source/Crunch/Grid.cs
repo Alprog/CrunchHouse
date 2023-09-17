@@ -5,7 +5,6 @@ namespace Crunch
 {
 	public partial class Grid : Node3D
 	{
-		[Export] public Camera3D Camera;
 		public TileMap TileMap;
 		public VectorXZI Pos;
 
@@ -29,27 +28,26 @@ namespace Crunch
 		{
 			if (Input.IsMouseButtonPressed(MouseButton.Left))
 			{
-				SetTileUnderMouse(4);
+				SetTileUnderRay(4);
 			}
 			if (Input.IsMouseButtonPressed(MouseButton.Right))
 			{
-				SetTileUnderMouse(0);
+				SetTileUnderRay(0);
 			}
 		}
 
-		public void SetTileUnderMouse(int tileIndex)
+		public void SetTileUnderRay(int tileIndex)
 		{
-			var screenPosition = GetViewport().GetMousePosition();
-			var rayOrigin = Camera.ProjectRayOrigin(screenPosition);
-			var rayDirection = Camera.ProjectRayNormal(screenPosition);
+			var ray = The.Application.World.HoverRay;
+			if (ray.Direction.Y == 0)
+			{
+				return;
+			}
 
-			var distance = rayOrigin.Y / -rayDirection.Y;
-
-			var collisionPosition = rayOrigin + rayDirection * distance;
-
+			var distance = ray.Origin.Y / -ray.Direction.Y;
+			var collisionPosition = ray.Origin + ray.Direction * distance;
 			int x = (int)collisionPosition.X;
 			int z = (int)collisionPosition.Z;
-
 			TileMap.SetTileIndex(x, z, tileIndex);
 		}
 

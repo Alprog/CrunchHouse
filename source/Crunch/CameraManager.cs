@@ -72,6 +72,12 @@ namespace Crunch
 
 		public void ProcessInput(float delta)
 		{
+			ProcessPressedKeys(delta);
+			SetWorldHoverRay();
+		}
+
+		private void ProcessPressedKeys(float delta)
+		{
 			var Direction = Vector3.Zero;
 
 			if (Input.IsKeyPressed(Key.W))
@@ -142,6 +148,14 @@ namespace Crunch
 			{
 				Rotation -= Mathf.Pi * delta / 4;
 			}
+		}
+
+		private void SetWorldHoverRay()
+		{
+			var screenPosition = GetViewport().GetMousePosition();
+			var origin = Camera.ProjectRayOrigin(screenPosition);
+			var direction = Camera.ProjectRayNormal(screenPosition);
+			The.Application.World.HoverRay = new Ray(origin, direction);
 		}
 
 		public void RefreshCameraPosition()
