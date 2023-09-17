@@ -19,17 +19,17 @@ namespace Crunch
             return type.GetDefaultConstructor().Invoke(EmptyArray<object>.Value);
         }
 
-        public static bool IsMouseAtWindow(this SubViewport viewport)
+        public static Vector2I GetSize(this Viewport viewport)
         {
-
-            var rect = new Rect2I(Vector2I.Zero, viewport.Size);
-            return rect.HasPoint(viewport.GetMousePosition().ToVector2I());
-        }
-
-        public static bool IsMouseAtWindow(this Godot.Window window)
-        {
-            var rect = new Rect2I(Vector2I.Zero, window.Size);
-            return rect.HasPoint(window.GetMousePosition().ToVector2I());
+            if (viewport is SubViewport subViewport)
+            {
+                return subViewport.Size;
+            }
+            if (viewport is Godot.Window window)
+            {
+                return window.Size;
+            }
+            return Vector2I.Zero;
         }
     }
 }

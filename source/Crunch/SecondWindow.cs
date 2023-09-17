@@ -11,13 +11,7 @@ namespace Crunch
 
 		public override void _Process(double delta)
 		{
-			if (Visible && this.IsMouseAtWindow())
-			{
-				if (!DisplayServer.WindowIsFocused(this.GetWindowId()))
-				{
-					this.GrabFocus();
-				}
-			}
+
 		}
 
 		public void OnCloseButtonPressed()
