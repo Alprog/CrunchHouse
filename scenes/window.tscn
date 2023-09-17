@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2btb6q4o3648"]
 
 [ext_resource type="Script" path="res://source/Crunch/Window.cs" id="1_q3u42"]
-[ext_resource type="Script" path="res://source/Crunch/CameraManager.cs" id="1_xg46m"]
 [ext_resource type="PackedScene" uid="uid://dk0xy5umrbnvu" path="res://scenes/console.tscn" id="2_8biac"]
+[ext_resource type="PackedScene" uid="uid://j7im2edx6ylp" path="res://scenes/3d_view.tscn" id="3_fgnyl"]
 
 [node name="Window" type="Control"]
 layout_mode = 3
@@ -31,59 +31,11 @@ grow_horizontal = 2
 grow_vertical = 2
 split_offset = 905
 
-[node name="3DView2" type="SubViewportContainer" parent="HSplitContainer"]
+[node name="3DView" parent="HSplitContainer" instance=ExtResource("3_fgnyl")]
 layout_mode = 2
-stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HSplitContainer/3DView2"]
-handle_input_locally = false
-size = Vector2i(905, 1024)
-render_target_update_mode = 4
-
-[node name="CameraManager" type="Control" parent="HSplitContainer/3DView2/SubViewport" node_paths=PackedStringArray("Camera")]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_xg46m")
-Camera = NodePath("Camera")
-
-[node name="Camera" type="Camera3D" parent="HSplitContainer/3DView2/SubViewport/CameraManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
-projection = 1
-current = true
-fov = 10.0
-size = 11.38
-near = 0.1
-far = 500.0
-
-[node name="3DView" type="SubViewportContainer" parent="HSplitContainer"]
+[node name="3DView2" parent="HSplitContainer" instance=ExtResource("3_fgnyl")]
 layout_mode = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="HSplitContainer/3DView"]
-handle_input_locally = false
-size = Vector2i(1003, 1024)
-render_target_update_mode = 4
-
-[node name="CameraManager" type="Control" parent="HSplitContainer/3DView/SubViewport" node_paths=PackedStringArray("Camera")]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_xg46m")
-Camera = NodePath("Camera")
-
-[node name="Camera" type="Camera3D" parent="HSplitContainer/3DView/SubViewport/CameraManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
-projection = 1
-current = true
-fov = 10.0
-size = 11.38
-near = 0.1
-far = 500.0
-
-[node name="Button" type="Button" parent="HSplitContainer/3DView/SubViewport/CameraManager"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "efefef"
 
 [node name="Console" parent="." instance=ExtResource("2_8biac")]
 visible = false

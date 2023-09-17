@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://j7im2edx6ylp"]
+
+[ext_resource type="Script" path="res://source/Crunch/CameraManager.cs" id="1_yf4ls"]
+
+[node name="3DView" type="SubViewportContainer"]
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="CameraManager" type="Control" parent="SubViewport" node_paths=PackedStringArray("Camera")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yf4ls")
+Camera = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="SubViewport/CameraManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46254, 0, 34.8477)
+projection = 1
+current = true
+fov = 10.0
+size = 11.38
+near = 0.1
+far = 500.0
