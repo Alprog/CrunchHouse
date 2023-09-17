@@ -7,6 +7,7 @@ namespace Crunch
     public class WindowManager : Singleton<WindowManager>
     {
         private List<Window> Windows = new List<Window>();
+        private Window FocusedWindow = null;
 
         public Window CreateNewWindow()
         {
@@ -60,6 +61,12 @@ namespace Crunch
 
         public void Update(float deltaTime)
         {
+            RefreshFocusedWindow();
+            FocusedWindow.Update(deltaTime);
+        }
+
+        public void RefreshFocusedWindow()
+        {
             for (int i = Windows.Count - 1; i >= 0; i--)
             {
                 var godotWindow = Windows[i].GodotWindow;
@@ -70,8 +77,10 @@ namespace Crunch
                     {
                         godotWindow.GrabFocus();
                     }
+                    FocusedWindow = Windows[i];
+                    break;
                 }
-            }
+            }    
         }
     }
 }
