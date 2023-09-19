@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://cls02ng13pa8q"]
-
-[node name="GodotWindow" type="Window"]
-mode = 3
-initial_position = 3
-size = Vector2i(1920, 1024)
-current_screen = 0
