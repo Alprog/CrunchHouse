@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -12,56 +13,22 @@ namespace Crunch
 
         public Window CreateNewWindow()
         {
-            var currentNode = The.Application.GetNode();
-           
-            //if (Windows.Count > 0)
-            {
-                var godotWindow = new Godot.Window 
-                { 
-                    Name = "GodotWindow",
-                    Mode = Godot.Window.ModeEnum.Fullscreen,
-                    InitialPosition = Godot.Window.WindowInitialPosition.CenterOtherScreen,
-                    CurrentScreen = Windows.Count
-                };
-                currentNode.AddChild(godotWindow);
-                currentNode = godotWindow;
-            }
-
             var window = Utils.InstantinateScene("window") as Window;
-            window.Name = GetWindowName(Windows.Count);
-            currentNode.AddChild(window);           
+            window.CurrentScreen = Windows.Count;
+            window.Name = String.Format("Window{0}", Windows.Count + 1);
             Windows.Add(window);           
+            The.Application.GetNode().AddChild(window);
             window.Initialize();
             return window;
         }
 
         public void CloseWindow(Window window)
         {
-            if (window.IsMain)
-            {
-                The.Application.Quit();
-            }
-            else
-            {
-                Windows.Remove(window);
-                window.GodotWindow.QueueFree();
-            }
-
+            Windows.Remove(window);
+            window.QueueFree();
             if (Windows.Count == 0)
             {
                 The.Application.Quit();
-            }
-        }
-
-        private string GetWindowName(int index)
-        {
-            if (index == 0)
-            {
-                return "MainWindow";
-            }
-            else
-            {
-                return "ExternalWindow" + index;
             }
         }
 
@@ -71,23 +38,26 @@ namespace Crunch
             FocusedWindow.Update(deltaTime);
         }
 
-        public void RefreshFocusedWindow()
+        private void RefreshFocusedWindow()
         {
-            for (int i = Windows.Count - 1; i >= 0; i--)
+            foreach (var window in Windows)
             {
-                var godotWindow = Windows[i].GodotWindow;
-                if (godotWindow.IsMouseAtWindow())
+                if (window.IsMouseAtWindow())
                 {
-                    var id = godotWindow.GetWindowId();
-                    if (!DisplayServer.WindowIsFocused(id))
-                    {
-                        godotWindow.GrabFocus();
-                    }
-                    FocusedWindow = Windows[i];
+                    SetFocusedWindow(window);
                     return;
                 }
-            } 
-            FocusedWindow = Windows.First();
+            }
+            SetFocusedWindow(Windows.First());
+        }
+
+        private void SetFocusedWindow(Window window)
+        {
+            if (!DisplayServer.WindowIsFocused(window.GetWindowId()))
+            {
+                window.GrabFocus();
+            }
+            FocusedWindow = window;
         }
     }
 }

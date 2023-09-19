@@ -4,19 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dk0xy5umrbnvu" path="res://scenes/console.tscn" id="2_8biac"]
 [ext_resource type="PackedScene" uid="uid://j7im2edx6ylp" path="res://scenes/3d_view.tscn" id="3_fgnyl"]
 
-[node name="Window" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Window" type="Window"]
+mode = 3
+initial_position = 3
+size = Vector2i(1920, 1024)
+current_screen = 0
 script = ExtResource("1_q3u42")
 
 [node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,7 +20,6 @@ grow_vertical = 2
 color = Color(0.309804, 0.0823529, 0.0862745, 1)
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,10 +35,8 @@ layout_mode = 2
 
 [node name="Console" parent="." instance=ExtResource("2_8biac")]
 visible = false
-layout_mode = 1
 
 [node name="CloseButton" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
