@@ -46,17 +46,15 @@ namespace Crunch
 			RefreshCameraPosition();
 		}
 
-		public override void _UnhandledInput(InputEvent @event)
-		{
-			//GD.Print(NameTag + " " + @event.GetType().Name);
-
-			if (@event is UpdateEvent updateEvent)
+		public void ProcessEvent(InputEvent inputEvent)
+		{		
+			if (inputEvent is UpdateEvent updateEvent)
 			{
-				ProcessInput(updateEvent.DeltaTime);
-				AcceptEvent();						
+				ProcessUpdate(updateEvent.DeltaTime);
+				return;
 			}
 
-			var mouseEvent = @event as InputEventMouseButton;
+			var mouseEvent = @inputEvent as InputEventMouseButton;
 			if (mouseEvent != null && mouseEvent.IsPressed())
 			{
 				if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
@@ -70,7 +68,7 @@ namespace Crunch
 			}
 		}
 
-		public void ProcessInput(float delta)
+		public void ProcessUpdate(float delta)
 		{
 			ProcessPressedKeys(delta);
 			SetWorldHoverRay();

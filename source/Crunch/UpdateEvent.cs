@@ -6,11 +6,10 @@ namespace Crunch
     public partial class UpdateEvent : InputEventAction
     {
         public float DeltaTime;
-        public bool Processed;    
 
-        public UpdateEvent(double deltaTime)
+        public UpdateEvent(float deltaTime)
         {
-            this.DeltaTime = (float)deltaTime;
+            this.DeltaTime = deltaTime;
         }
     }
 }

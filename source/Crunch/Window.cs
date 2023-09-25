@@ -17,17 +17,30 @@ namespace Crunch
             The.WindowManager.CloseWindow(this);
         }
 
+        public void ProcessEvent(InputEvent inputEvent)
+        {
+            var console = this.Find<Console>("Console");
+            console.ProcessEvent(inputEvent);
+
+            if (!IsInputHandled())
+            {
+                var managers = this.FindAll<CameraManager>();
+                foreach (var manager in managers)
+                {
+                    if (manager.GetViewport().IsMouseAtWindow())
+                    {
+                        manager.ProcessEvent(inputEvent);
+                        break;
+                    }
+                }       
+            }
+
+            SetInputAsHandled();
+        }
+
         public void Update(float deltaTime)
         {
-            var managers = this.FindAll<CameraManager>();
-            foreach (var manager in managers)
-            {
-                if (manager.GetViewport().IsMouseAtWindow())
-                {
-                    manager.ProcessInput(deltaTime);
-                    break;
-                }
-            }
+   
         }
     }
 }

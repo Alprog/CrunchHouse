@@ -13,7 +13,7 @@ namespace Crunch
 		private ConsoleHistory History = new ConsoleHistory();
 		private bool SkipNextAutoComplete = false;
 
-		public override void _Input(InputEvent @event)
+		public void ProcessEvent(InputEvent @event)
 		{
 			if (@event is InputEventKey eventKey)
 			{
@@ -65,18 +65,11 @@ namespace Crunch
 					}				
 				}			
 			}
+		
+			var sub = this.Find<SubViewport>("SubViewport");
+			sub.HandleInputLocally = true;
+			sub.PushInput(@event, true);
 
-			if (Visible)
-			{
-				if (@event is UpdateEvent @updateEvent)
-				{
-					AcceptEvent();
-				}
-			}
-		}
-
-		public override void _GuiInput(InputEvent @event)
-		{
 			if (Visible)
 			{
 				AcceptEvent();

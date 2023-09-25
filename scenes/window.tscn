@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2btb6q4o3648"]
+[gd_scene load_steps=5 format=3 uid="uid://b2btb6q4o3648"]
 
 [ext_resource type="Script" path="res://source/Crunch/Window.cs" id="1_q3u42"]
 [ext_resource type="PackedScene" uid="uid://dk0xy5umrbnvu" path="res://scenes/console.tscn" id="2_8biac"]
 [ext_resource type="PackedScene" uid="uid://j7im2edx6ylp" path="res://scenes/3d_view.tscn" id="3_fgnyl"]
+[ext_resource type="Script" path="res://source/Blocker.cs" id="4_cynbm"]
 
 [node name="Window" type="Window"]
 mode = 3
@@ -44,5 +45,12 @@ offset_left = -27.0
 offset_bottom = 31.0
 grow_horizontal = 0
 text = " X "
+
+[node name="Blocker" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_cynbm")
 
 [connection signal="pressed" from="CloseButton" to="." method="OnCloseButtonPressed"]
