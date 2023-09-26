@@ -5,6 +5,9 @@ namespace Crunch
 {
     public partial class Window : Godot.Window
     {
+        Console Console => this.Find<Console>();
+        EventScope TopMenuLayer => this.Find<EventScope>("TopMenuLayer");
+
         public void Initialize()
         {
             //var console = Utils.InstantinateScene("console") as Console;
@@ -19,8 +22,17 @@ namespace Crunch
 
         public void ProcessEvent(InputEvent inputEvent)
         {
-            var console = this.Find<Console>("Console");
-            console.ProcessEvent(inputEvent);
+            ProcessGlobalShortcuts(inputEvent);
+
+            if (!IsInputHandled())
+            {
+                TopMenuLayer.ProcessEvent(inputEvent);
+            }
+
+            if (!IsInputHandled())
+            {
+                Console.ProcessEvent(inputEvent);
+            }
 
             if (!IsInputHandled())
             {
@@ -38,9 +50,18 @@ namespace Crunch
             SetInputAsHandled();
         }
 
-        public void Update(float deltaTime)
+        public bool ProcessGlobalShortcuts(InputEvent inputEvent)
         {
-   
+            if (inputEvent is InputEventKey eventKey)
+			{
+				if (eventKey.IsPressed() && eventKey.Keycode == Key.Quoteleft)
+				{
+					Console.Toggle();
+                    SetInputAsHandled();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

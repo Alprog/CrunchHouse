@@ -20,10 +20,9 @@ namespace Crunch
 
 		public override void _Process(double delta)
 		{
+			The.WindowManager.RefreshFocusedWindow();
+
 			float deltaTime = (float)delta;
-
-			The.WindowManager.Update(deltaTime);
-
 			var updateEvent = new UpdateEvent(deltaTime);
 			Input.ParseInputEvent(updateEvent);
 			

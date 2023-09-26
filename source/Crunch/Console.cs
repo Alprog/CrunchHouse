@@ -17,7 +17,7 @@ namespace Crunch
 		{
 			if (@event is InputEventKey eventKey)
 			{
-				if (@event.IsPressed())
+				if (eventKey.IsPressed())
 				{
 					switch (eventKey.Keycode)
 					{
@@ -66,13 +66,13 @@ namespace Crunch
 				}			
 			}
 		
-			var sub = this.Find<SubViewport>("SubViewport");
+			var sub = this.Find<SubViewport>();
 			sub.HandleInputLocally = true;
 			sub.PushInput(@event, true);
 
 			if (Visible)
 			{
-				AcceptEvent();
+				GetWindow().SetInputAsHandled();
 			}
 		}
 

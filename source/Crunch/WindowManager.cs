@@ -32,13 +32,7 @@ namespace Crunch
             }
         }
 
-        public void Update(float deltaTime)
-        {
-            RefreshFocusedWindow();
-            FocusedWindow.Update(deltaTime);
-        }
-
-        private void RefreshFocusedWindow()
+        public void RefreshFocusedWindow()
         {
             foreach (var window in Windows)
             {

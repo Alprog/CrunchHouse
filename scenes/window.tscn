@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2btb6q4o3648"]
+[gd_scene load_steps=6 format=3 uid="uid://b2btb6q4o3648"]
 
 [ext_resource type="Script" path="res://source/Crunch/Window.cs" id="1_q3u42"]
 [ext_resource type="PackedScene" uid="uid://dk0xy5umrbnvu" path="res://scenes/console.tscn" id="2_8biac"]
 [ext_resource type="PackedScene" uid="uid://j7im2edx6ylp" path="res://scenes/3d_view.tscn" id="3_fgnyl"]
 [ext_resource type="Script" path="res://source/Blocker.cs" id="4_cynbm"]
+[ext_resource type="Script" path="res://source/Crunch/EventScope.cs" id="4_yo8yw"]
 
 [node name="Window" type="Window"]
 mode = 3
@@ -34,10 +35,23 @@ layout_mode = 2
 [node name="3DView2" parent="HSplitContainer" instance=ExtResource("3_fgnyl")]
 layout_mode = 2
 
-[node name="Console" parent="." instance=ExtResource("2_8biac")]
+[node name="TopMenuLayer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("4_yo8yw")
+
+[node name="SubViewport" type="SubViewport" parent="TopMenuLayer"]
+transparent_bg = true
+size = Vector2i(1920, 1024)
+
+[node name="Console" parent="TopMenuLayer/SubViewport" instance=ExtResource("2_8biac")]
 visible = false
 
-[node name="CloseButton" type="Button" parent="."]
+[node name="CloseButton" type="Button" parent="TopMenuLayer/SubViewport"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -53,4 +67,4 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("4_cynbm")
 
-[connection signal="pressed" from="CloseButton" to="." method="OnCloseButtonPressed"]
+[connection signal="pressed" from="TopMenuLayer/SubViewport/CloseButton" to="." method="OnCloseButtonPressed"]
