@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Crunch
 {
-	public partial class Console : VSplitContainer
+	public partial class Console : EventScope
 	{
 		private LineEdit CommandLineEdit => FindChild("CommandLineEdit") as LineEdit;
 		private RichTextLabel Output => FindChild("Output") as RichTextLabel;
@@ -70,10 +70,7 @@ namespace Crunch
 			sub.HandleInputLocally = true;
 			sub.PushInput(@event, true);
 
-			if (Visible)
-			{
-				GetWindow().SetInputAsHandled();
-			}
+			GetWindow().SetInputAsHandled();
 		}
 
 		public void Toggle()

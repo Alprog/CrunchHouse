@@ -5,8 +5,9 @@ namespace Crunch
 {
     public partial class Window : Godot.Window
     {
-        Console Console => this.Find<Console>();
         EventScope TopMenuLayer => this.Find<EventScope>("TopMenuLayer");
+        Console Console => this.Find<Console>();
+        EventScope LowLevelLayer => this.Find<EventScope>("LowLevelLayer");
 
         public void Initialize()
         {
@@ -31,7 +32,15 @@ namespace Crunch
 
             if (!IsInputHandled())
             {
-                Console.ProcessEvent(inputEvent);
+                if (Console.Visible)
+                {
+                    Console.ProcessEvent(inputEvent);
+                }
+            }
+
+            if (!IsInputHandled())
+            {
+                LowLevelLayer.ProcessEvent(inputEvent);
             }
 
             if (!IsInputHandled())

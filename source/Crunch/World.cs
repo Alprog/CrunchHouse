@@ -9,7 +9,6 @@ namespace Crunch
 
         public void Update(float delta)
         {
-            
         }
     }
 }
