@@ -60,10 +60,12 @@ namespace Crunch
 				if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
 				{
 					ZoomK += 1.0f / ZoomStepCount;
+					ZoomK = Mathf.Clamp(ZoomK, 0, 1);
 				}
 				else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 				{
 					ZoomK -= 1.0f / ZoomStepCount;
+					ZoomK = Mathf.Clamp(ZoomK, 0, 1);
 				}
 			}
 		}

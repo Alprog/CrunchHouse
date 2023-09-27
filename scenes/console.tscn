@@ -18,7 +18,7 @@ script = ExtResource("1_n634e")
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1128, 518)
+size = Vector2i(584, 310)
 render_target_update_mode = 4
 
 [node name="VSplitContainer" type="VSplitContainer" parent="SubViewport"]
