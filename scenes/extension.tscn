@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b88koehpnmt7t"]
+
+[ext_resource type="Texture2D" uid="uid://dwiyjcnc22rch" path="res://sprites/head.png" id="1_pbmq7"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GDExample" type="GDExample" parent="."]
+position = Vector2(16.0641, 1.17033)
+texture = ExtResource("1_pbmq7")
+centered = false
