@@ -34,24 +34,39 @@ namespace Crunch
 
         public void RefreshFocusedWindow()
         {
-            foreach (var window in Windows)
+            FocusedWindow = FindFocusedWindowAtOSLevel();
+            if (FocusedWindow != null)
             {
-                if (window.IsMouseAtWindow())
+                foreach (var window in Windows)
                 {
-                    SetFocusedWindow(window);
-                    return;
+                    if (window.IsMouseAtWindow())
+                    {
+                        SetFocusedWindow(window);
+                        return;
+                    }
                 }
             }
-            SetFocusedWindow(Windows.First());
         }
 
         private void SetFocusedWindow(Window window)
-        {
+        {            
             if (!DisplayServer.WindowIsFocused(window.GetWindowId()))
             {
                 window.GrabFocus();
             }
             FocusedWindow = window;
+        }
+
+        private Window FindFocusedWindowAtOSLevel()
+        {
+            foreach (var window in Windows)
+            {
+                if (DisplayServer.WindowIsFocused(window.GetWindowId()))
+                {
+                    return window;
+                }
+            }
+            return null;
         }
     }
 }

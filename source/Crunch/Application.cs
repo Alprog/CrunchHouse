@@ -15,7 +15,7 @@ namespace Crunch
 			World = Utils.InstantinateScene("world") as World;
 			AddChild(World);
 			The.WindowManager.CreateNewWindow();
-			//The.WindowManager.CreateNewWindow();
+			The.WindowManager.CreateNewWindow();
 		}
 
 		public override void _Process(double delta)
