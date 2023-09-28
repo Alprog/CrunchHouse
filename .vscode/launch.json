@@ -1,15 +1,40 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Play",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "C:/Godot-bin/Godot_v4.1.1-stable_mono_win64.exe",
-      "args": [],
-      "cwd": "${workspaceFolder}",
-      "stopAtEntry": false,
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "C# RunDebug",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "C# build",
+			"program": "C:/Godot-bin/Godot_v4.1.1-stable_mono_win64.exe",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"stopAtEntry": false,
+		},
+		{
+            "name": "C++ Test in Editor",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "D:/Development/godot4-git/bin/godot.windows.tools.64.exe",
+            "args": [
+                "-e",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/test/demo",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "build test debug"
+        },
+        {
+            "name": "C++ Test runtime",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "D:/Development/godot4-git/bin/godot.windows.tools.64.exe",
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/test/demo",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "build test debug"
+        }
+	]
 }
