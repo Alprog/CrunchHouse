@@ -52,29 +52,24 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "C++ build test debug",
+            "label": "C++ build myplugin debug",
             "group": "build",
 
             "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/test"
-            },
             "command": "scons",
             "args": [
                 "target=template_debug",
                 "platform=windows",
+                "dev_build=yes",
                 "-j8"
             ],            
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "C++ build test release",
-            "type": "shell",
+            "label": "C++ build myplugin release",
             "group": "build",
 
-            "options": {
-                "cwd": "${workspaceFolder}/test"
-            },
+            "type": "shell",
             "command": "scons",            
             "args": [
                 "target=template_release",

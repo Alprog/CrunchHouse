@@ -15,26 +15,26 @@
             "name": "C++ Test in Editor",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "D:/Development/godot4-git/bin/godot.windows.tools.64.exe",
+            "program": "C:/Godot-bin/Godot_v4.1.1-stable_mono_win64.exe",
             "args": [
                 "-e",
-            ],
+            ],            
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/test/demo",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "build test debug"
+            "preLaunchTask": "C++ build myplugin debug"
         },
         {
             "name": "C++ Test runtime",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "D:/Development/godot4-git/bin/godot.windows.tools.64.exe",
+            "program": "C:/Godot-bin/Godot_v4.1.1-stable_mono_win64.exe",
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/test/demo",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "build test debug"
+            "preLaunchTask": "C++ build myplugin debug"
         }
 	]
 }

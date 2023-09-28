@@ -3,3 +3,4 @@ bin
 .godot/
 *.obj
 *.dblite
+*.pdb
