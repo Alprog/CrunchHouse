@@ -1,115 +1,87 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-		{
-			"label": "C# build",
-			"command": "dotnet",
-			"type": "process",
-			"args": [
-				"build"
-			],
-			"problemMatcher": "$msCompile",
-			"presentation": {
-				"echo": true,
-				"reveal": "silent",
-				"focus": false,
-				"panel": "shared",
-				"showReuseMessage": true,
-				"clear": false
-			}
-		},
-		
-		{
+        {
+            "label": "C# build",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build"
+            ],
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+        {
             "label": "C++ build godot-cpp debug",
-            "type": "shell",
-            "command": "scons",
             "group": "build",
-            "windows": {
-                "args": [
-                    "target=debug",
-                    "platform=windows",
-                    "-j8"
-                ]
+
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/godot-cpp"
             },
-            "linux": {
-                "args": [
-                    "target=debug",
-                    "platform=x11",
-                    "-j8"
-                ]
-            },
+            "command": "scons",
+            "args": [
+                "target=template_debug",
+                "platform=windows",
+                "-j8"
+            ],
+            
             "problemMatcher": "$msCompile"
         },
         {
             "label": "C++ build godot-cpp release",
-            "type": "shell",
-            "command": "scons",
             "group": "build",
-            "windows": {
-                "args": [
-                    "target=release",
-                    "platform=windows",
-                    "-j8"
-                ]
+
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/godot-cpp"
             },
-            "linux": {
-                "args": [
-                    "target=release",
-                    "platform=x11",
-                    "-j8"
-                ]
-            },
+            "command": "scons",           
+            "args": [
+                "target=template_release",
+                "platform=windows",
+                "-j8"
+            ],
             "problemMatcher": "$msCompile"
         },
         {
             "label": "C++ build test debug",
+            "group": "build",
+
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}/test"
             },
             "command": "scons",
-            "group": "build",
-            "windows": {
-                "args": [
-                    "target=debug",
-                    "platform=windows",
-                    "-j8"
-                ]
-            },
-            "linux": {
-                "args": [
-                    "target=debug",
-                    "platform=x11",
-                    "-j8"
-                ]
-            },
-            // "dependsOn": "build godot-cpp debug",
+            "args": [
+                "target=template_debug",
+                "platform=windows",
+                "-j8"
+            ],            
             "problemMatcher": "$msCompile"
         },
         {
             "label": "C++ build test release",
             "type": "shell",
+            "group": "build",
+
             "options": {
                 "cwd": "${workspaceFolder}/test"
             },
-            "command": "scons",
-            "group": "build",
-            "windows": {
-                "args": [
-                    "target=release",
-                    "platform=windows",
-                    "-j8"
-                ]
-            },
-            "linux": {
-                "args": [
-                    "target=release",
-                    "platform=x11",
-                    "-j8"
-                ]
-            },
-            // "dependsOn": "build godot-cpp release",
+            "command": "scons",            
+            "args": [
+                "target=template_release",
+                "platform=windows",
+                "-j8"
+            ],
             "problemMatcher": "$msCompile"
         }
-	]
+    ]
 }
