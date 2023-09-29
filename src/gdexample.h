@@ -18,6 +18,8 @@ public:
     GDExample();
     ~GDExample();
 
+    int get_amplitude() { return 77; }
+
     void _process(double delta);
 };
 

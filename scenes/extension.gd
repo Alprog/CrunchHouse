@@ -5,6 +5,12 @@ extends Node2D
 func _ready():
 	var i:int = 3
 	i = i + 1
+	
+	var gd = find_child("GDExample");
+		
+	var g = gd.get_amplitude();
+	print(g);
+	
 	pass # Replace with function body.
 
 
